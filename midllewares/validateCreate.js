@@ -1,4 +1,4 @@
-const { getAllProducts } = require('../services/productsServices');
+const productsServices = require('../services/productsServices');
 
 async function isValidName(req, res, next) {
   const { name } = req.body;
@@ -8,7 +8,7 @@ async function isValidName(req, res, next) {
       message: '"name" length must be at least 5 characters long' },
     });
   }
-  const productdb = await getAllProducts('products');
+  const productdb = await productsServices.getAllProducts();
   const filtered = await productdb.find((db) => db.name === name);
   if (filtered) {
     return res.status(422).json({
