@@ -23,4 +23,15 @@ const updateProducts = async (id, name, quantity) => {
   return data;
 };
 
-module.exports = { getAllProducts, createProducts, getByIdProducts, updateProducts };
+const deleteProducts = async (id) => {
+  const data = await Products.exclude(id);
+  return data;
+};
+
+module.exports = {
+  getAllProducts,
+  createProducts,
+  getByIdProducts,
+  updateProducts,
+  deleteProducts,
+};

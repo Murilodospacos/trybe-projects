@@ -2,6 +2,7 @@ const { ObjectId } = require('mongodb');
 const connection = require('./connections');
 
 const getById = async (id) => {
+  if (!ObjectId.isValid(id)) { return null; }
   const db = await connection();
   const result = await db.collection('products')
   .findOne(ObjectId(id));
@@ -30,4 +31,11 @@ async function update(id, name, quantity) {
   return { id, name, quantity };
 }
 
-module.exports = { getAll, create, getById, update };
+async function exclude(id) {
+  if (!ObjectId.isValid(id)) { return null; }
+  const db = await connection();
+  await db.collection('products')
+  .deleteOne({ _id: ObjectId(id) });
+}
+
+module.exports = { getAll, create, getById, update, exclude };

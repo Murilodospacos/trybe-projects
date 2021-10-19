@@ -44,10 +44,10 @@ const updateProducts = async (req, res) => {
 const deleteProducts = async (req, res) => {
   try {
     const { id } = req.params;
-    await Products.exclude(id);
+    await Products.deleteProducts(id);
     res.status(200).json({ message: 'Registro deletado com sucesso' });
   } catch (error) {
-    res.status(500).json({ message: 'Aconteceu erro ao atualizar o produto' });
+    res.status(500).json({ message: 'Aconteceu erro ao deletar o produto' });
   }
 };
 
