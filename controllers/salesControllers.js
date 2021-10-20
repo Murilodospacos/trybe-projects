@@ -1,5 +1,18 @@
 const Sales = require('../services/salesServices');
 
+const getByIdSales = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await Sales.getByIdSales(id);
+    return res.status(200).json(result);
+  } catch (error) {
+    return res.status(404).json({ err: {
+      code: 'not_found',
+      message: 'Sale not found',
+    } });
+  }
+};
+
 const getAllSales = async (req, res) => {
   try {
     const sales = await Sales.getAllSales();
@@ -21,7 +34,22 @@ const createSales = async (req, res) => {
   }
 };
 
+const updateSales = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { productId, quantity } = req.body;
+    const result = await Sales.updateSales(id, productId, quantity);
+    return res.status(200).json(result);
+  } catch (error) {
+    return res.status(422).json({
+      err: { code: 'invalid_data',
+      message: 'Wrong product ID or invalid quantity' } });
+  }
+};
+
 module.exports = {
+  getByIdSales,
   getAllSales,
   createSales,
+  updateSales,
 };
