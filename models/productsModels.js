@@ -38,4 +38,10 @@ async function exclude(id) {
   .deleteOne({ _id: ObjectId(id) });
 }
 
-module.exports = { getAll, create, getById, update, exclude };
+module.exports = {
+  getAll,
+  create,
+  getById,
+  update,
+  exclude,
+};
