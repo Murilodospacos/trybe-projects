@@ -1,4 +1,3 @@
-const joi = require('@hapi/joi');
 const Sales = require('../models/salesModels');
 const Products = require('../models/productsModels');
 
