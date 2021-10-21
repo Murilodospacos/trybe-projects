@@ -1,8 +1,10 @@
+const joi = require('@hapi/joi');
 const Sales = require('../models/salesModels');
 const Products = require('../models/productsModels');
 
 const getByIdSales = async (id) => {
   const data = await Sales.getById(id);
+  if (!data) throw new Error('Produto não cadastrado');
   return data;
 };
 
@@ -25,9 +27,16 @@ const createSales = async (sales) => {
   return data;
 };
 
-const updateSales = async (id, productId, quantity) => {
-  const data = await Sales.update(id, productId, quantity);
+const updateSales = async (id, sales) => {
+  const data = await Sales.update(id, sales);
   return data;
+};
+
+const deleteSales = async (id) => {
+  const salesID = await Sales.getById(id);
+  if (!salesID) throw new Error('Produto não cadastrado');
+  await Sales.exclude(id);
+  return salesID;
 };
 
 module.exports = {
@@ -35,4 +44,5 @@ module.exports = {
   getAllSales,
   createSales,
   updateSales,
+  deleteSales,
 };

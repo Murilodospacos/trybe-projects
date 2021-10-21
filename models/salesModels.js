@@ -23,11 +23,18 @@ async function create(sales) {
   return { _id: addSales.insertedId, itensSold: sales };
 }
 
-async function update(id, productId, quantity) {
+async function update(id, sales) {
   const db = await connection();
   await db.collection('sales')
-  .updateOne({ _id: ObjectId(id) }, { $set: { productId, quantity } });
-  return { id, productId, quantity };
+  .updateOne({ _id: ObjectId(id) }, { $set: { itensSold: sales } });
+  return { _id: id, itensSold: sales };
+}
+
+async function exclude(id) {
+  if (!ObjectId.isValid(id)) { return null; }
+  const db = await connection();
+  await db.collection('sales')
+  .deleteOne({ _id: ObjectId(id) });
 }
 
 module.exports = {
@@ -35,4 +42,5 @@ module.exports = {
   getAll,
   create,
   update,
+  exclude,
 };
