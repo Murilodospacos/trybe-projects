@@ -10,6 +10,24 @@ const getById = async (id) => {
   return { _id, name, quantity };
 };
 
+const updateProductSale = async (id, quantity) => {
+  if (!ObjectId.isValid(id)) { return null; }
+  const db = await connection();
+  await db.collection('products').updateOne(
+    { _id: ObjectId(id) },
+    { $inc: { quantity: -quantity } },
+  );
+};
+
+const updateDeleteSale = async (id, quantity) => {
+  if (!ObjectId.isValid(id)) { return null; }
+  const db = await connection();
+  await db.collection('products').updateOne(
+    { _id: ObjectId(id) },
+    { $inc: { quantity } },
+  );
+};
+
 const getAll = async () => {
   const db = await connection();
   const result = await db.collection('products')
@@ -39,6 +57,8 @@ async function exclude(id) {
 }
 
 module.exports = {
+  updateDeleteSale,
+  updateProductSale,
   getAll,
   create,
   getById,

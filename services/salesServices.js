@@ -14,11 +14,12 @@ const getAllSales = async () => {
 
 const createSales = async (sales) => {
   const products = await Products.getAll();
-  sales.forEach((newSalesProducts) => {
-    const searchResult = products.find(({ _id }) => _id.toString() === newSalesProducts.productId);
+  sales.forEach(async ({ productId, quantity }) => {
+    await Products.updateProductSale(productId, quantity);
+    const searchResult = products.find(({ _id }) => _id.toString() === productId);
     if (!searchResult
-      || newSalesProducts.quantity <= 0
-      || typeof newSalesProducts.quantity !== 'number') {
+      || quantity < 0
+      || typeof quantity !== 'number') {
         throw new Error('Produto não cadastrado');
     }
   });
@@ -33,9 +34,15 @@ const updateSales = async (id, sales) => {
 
 const deleteSales = async (id) => {
   const salesID = await Sales.getById(id);
+
   if (!salesID) throw new Error('Produto não cadastrado');
+
   await Sales.exclude(id);
-  return salesID;
+
+  const { itensSold } = salesID;
+  itensSold.forEach(async ({ productId, quantity }) => {
+    await Products.updateDeleteSale(productId, quantity);
+  });
 };
 
 module.exports = {
