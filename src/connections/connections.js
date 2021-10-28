@@ -24,4 +24,4 @@ console.error(err);
 });
 }
 
-module.exports = connection; 
+module.exports = connection;

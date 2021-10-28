@@ -11,12 +11,12 @@ const getAllUsers = async (req, res) => {
 
 const createUsers = async (req, res) => {
   try {
-    const { name, email, password } = req.body
+    const { name, email, password } = req.body;
     const user = await Users.createUsers(name, email, password);
     if (user.error && user.error === 'Email_Exists') {
       return res.status(409).json({
         message: 'Email already registered',
-      })
+      });
     }
     return res.status(201).json({ user });
   } catch (error) {
@@ -26,5 +26,5 @@ const createUsers = async (req, res) => {
 
 module.exports = {
   getAllUsers,
-  createUsers
-}
+  createUsers,
+};
