@@ -5,14 +5,22 @@ const getAllRecipes = async () => {
   return data;
 };
 
+const getbyIdRecipes = async (id) => {
+  const data = await Recipes.getbyIdRecipes(id);
+  if (!data) {
+    return null;
+  }
+  console.log(data);
+  return data;
+};
+
 const createRecipes = async (userData, name, ingredients, preparation) => {
-  const usersExists = await Recipes.recipesExists({ name });
-  if (usersExists) return { error: 'Email_Exists' };
   const data = await Recipes.createRecipe(userData, name, ingredients, preparation);
   return data;
 };
 
 module.exports = {
+  getbyIdRecipes,
   createRecipes,
   getAllRecipes,
 };

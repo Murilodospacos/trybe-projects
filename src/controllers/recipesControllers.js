@@ -9,6 +9,21 @@ const getAllRecipes = async (_req, res) => {
   }
 };
 
+const getbyIdRecipes = async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(id);
+    const dataRecipes = await Recipes.getbyIdRecipes(id);
+
+    if (!dataRecipes) {
+      return res.status(404).json({ message: 'recipe not found' });
+    }
+    return res.status(200).json(dataRecipes);
+  } catch (error) {
+    return res.status(500).json({ message: 'Erro no Servidor' });
+  }
+};
+
 const createRecipes = async (req, res) => {
   try {
     const { name, ingredients, preparation } = req.body;
@@ -26,6 +41,7 @@ const createRecipes = async (req, res) => {
 };
 
 module.exports = {
+  getbyIdRecipes,
   getAllRecipes,
   createRecipes,
 };

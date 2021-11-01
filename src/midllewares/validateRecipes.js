@@ -1,3 +1,5 @@
+const { ObjectId } = require('mongodb');
+
 const isValidateNameRecipe = (req, res, next) => {
   const { name } = req.body;
   if (!name || name === '') {
@@ -22,7 +24,17 @@ const isValidatePreparationRecipe = (req, res, next) => {
   next();
 };
 
+const isValidateIdRecipe = (req, res, next) => {
+  const { id } = req.params;
+  const result = ObjectId.isValid(id);
+  if (!result) {
+    return res.status(404).json({ message: 'recipe not found' });
+  }
+  next();
+};
+
 module.exports = {
+  isValidateIdRecipe,
   isValidateNameRecipe,
   isvalidateIngredientsRecipe,
   isValidatePreparationRecipe,

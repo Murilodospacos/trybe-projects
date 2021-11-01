@@ -4,11 +4,13 @@ const {
   isValidateToken,
 } = require('../midllewares/validateToken');
 const {
+  isValidateIdRecipe,
   isValidateNameRecipe,
   isvalidateIngredientsRecipe,
   isValidatePreparationRecipe,
 } = require('../midllewares/validateRecipes');
 
+router.get('/:id', isValidateIdRecipe, recipesControllers.getbyIdRecipes);
 router.get('/', recipesControllers.getAllRecipes);
 router.post('/',
   isValidateToken,
