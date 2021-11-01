@@ -32,7 +32,6 @@ const differentEmail = async (req, res, next) => {
   if (!validateUserEmail || validateUserEmail === null) {
     return res.status(401).json({ message: error });
   }
-  console.log(validateUserEmail.email);
   if (email !== validateUserEmail.email) {
     return res.status(401).json({ message: error });
   }
@@ -45,24 +44,12 @@ const isValidatePassword = async (req, res, next) => {
   if (validateUserPassword === null || !validateUserPassword) {
     return res.status(401).json({ message: error });
   }
-  console.log(validateUserPassword.password);
   if (password !== validateUserPassword.password) {
     return res.status(401).json({ message: error });
   }
 
   next();
 };
-
-// const isValidateToken = (req, res, next) => {
-// const token = req.headers.authorization;
-// if (token === '' || token === undefined) {
-//   return res.status(401).json({ message: 'Token não encontrado' }); 
-//   }
-//   if (token.length !== 16) {
-//     return res.status(401).json({ message: 'Token inválido' }); 
-//   }
-//   next();
-// }; 
 
 module.exports = {
   isValidateEmailBinding,

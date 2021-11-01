@@ -9,7 +9,7 @@ const validateToken = async (req, res) => {
     const user = await UsersLogin.usersLoginExists({ email, password }); 
     const jwtConfig = {
       algorithm: 'HS256',
-      expiresIn: '7d',
+      expiresIn: '2h',
     };
     const token = jwt.sign({ data: user }, secret, jwtConfig);
     /* Por fim, nós devolvemos essa informação ao usuário. */
