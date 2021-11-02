@@ -14,12 +14,11 @@ const getbyIdRecipes = async (id) => {
   return findRecipes;
 };
 
-const createRecipe = async (userData, name, ingredients, preparation) => {
+const createRecipe = async (data, name, ingredients, preparation) => {
   const db = await connection();
-  const { _id } = userData;
   const addRecipe = await db.collection('recipes')
-  .insertOne({ name, ingredients, preparation, userId: _id });
-  return { name, ingredients, preparation, userId: _id, _id: addRecipe.insertedId };
+  .insertOne({ name, ingredients, preparation, userId: data.id });
+  return { name, ingredients, preparation, userId: data.id, _id: addRecipe.insertedId };
 };
 
 const updateRecipe = async (id, recipe, data) => {
@@ -39,10 +38,19 @@ const excludeRecipe = async (id) => {
   .deleteOne({ _id: ObjectId(id) });
 };
 
+const addImage = async (id, image) => {
+  const db = await connection();
+  await db.collection('recipes')
+  .updateOne({ _id: ObjectId(id) }, { $set: { image } });
+  const result = await getbyIdRecipes(id);
+  return result;
+};
+
 module.exports = {
   getAllRecipes,
   getbyIdRecipes,
   createRecipe,
   updateRecipe,
   excludeRecipe,
+  addImage,
 };

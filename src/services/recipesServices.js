@@ -13,9 +13,9 @@ const getbyIdRecipes = async (id) => {
   return data;
 };
 
-const createRecipes = async (userData, name, ingredients, preparation) => {
-  const data = await Recipes.createRecipe(userData, name, ingredients, preparation);
-  return data;
+const createRecipes = async (data, name, ingredients, preparation) => {
+  const dataCreate = await Recipes.createRecipe(data, name, ingredients, preparation);
+  return dataCreate;
 };
 
 const updateRecipe = async (id, recipe, data) => {
@@ -28,10 +28,22 @@ const excludeRecipe = async (id) => {
   return exclude;
 };
 
+const addImage = async (id, data) => {
+  const userId = data.id;
+  const { role } = data;
+  const recipeImage = await Recipes.getbyIdRecipes(id);
+  const imgURL = `localhost:3000/src/uploads/${id}.jpeg`;
+  if (recipeImage.userId === userId || role === 'admin') {
+    const updateImg = await Recipes.addImage(id, imgURL);
+    return updateImg;
+  }
+};
+
 module.exports = {
   updateRecipe,
   getbyIdRecipes,
   createRecipes,
   getAllRecipes,
   excludeRecipe,
+  addImage,
 };

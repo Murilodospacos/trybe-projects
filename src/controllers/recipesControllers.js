@@ -28,8 +28,8 @@ const getbyIdRecipes = async (req, res) => {
 const createRecipes = async (req, res) => {
   try {
     const { name, ingredients, preparation } = req.body;
-    const userData = req.user;
-    const recipe = await Recipes.createRecipes(userData, name, ingredients, preparation);
+    const { data } = req.user;
+    const recipe = await Recipes.createRecipes(data, name, ingredients, preparation);
     if (recipe.error && recipe.error === 'Recipe_Exists') {
       return res.status(409).json({
         message: 'Recipe already registered',
@@ -42,10 +42,9 @@ const createRecipes = async (req, res) => {
 };
 
 const updateRecipe = async (req, res) => {
-  console.log(req.user);
   try {
     const { id } = req.params;
-    const data = req.user;
+    const { data } = req.user;
     const { name, ingredients, preparation } = req.body;
     const result = await Recipes.updateRecipe(id, { name, ingredients, preparation }, data.id);
     return res.status(200).json(result);
@@ -64,10 +63,18 @@ const deleteRecipe = async (req, res) => {
   }
 };
 
+const addImage = async (req, res) => {
+  const { id } = req.params;
+  const { data } = req.user;
+  const result = await Recipes.addImage(id, data);
+  return res.status(200).json(result);
+};
+
 module.exports = {
   getbyIdRecipes,
   getAllRecipes,
   createRecipes,
   updateRecipe,
   deleteRecipe,
+  addImage,
 };
