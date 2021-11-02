@@ -11,20 +11,38 @@ const getAllRecipes = async () => {
 const getbyIdRecipes = async (id) => {
   const db = await connection();
   const findRecipes = await db.collection('recipes').findOne({ _id: ObjectId(id) });
-  console.log(findRecipes);
   return findRecipes;
 };
 
-async function createRecipe(userData, name, ingredients, preparation) {
+const createRecipe = async (userData, name, ingredients, preparation) => {
   const db = await connection();
-  const addRecipe = await db.collection('recipes')
-  .insertOne({ name, ingredients, preparation });
   const { _id } = userData;
+  const addRecipe = await db.collection('recipes')
+  .insertOne({ name, ingredients, preparation, userId: _id });
   return { name, ingredients, preparation, userId: _id, _id: addRecipe.insertedId };
-}
+};
+
+const updateRecipe = async (id, recipe, data) => {
+  const db = await connection();
+  await db.collection('recipes')
+  .updateOne({ _id: ObjectId(id) }, { $set: { ...recipe } });
+  return {
+    _id: id,
+    ...recipe,
+    userId: data,
+  };
+};
+
+const excludeRecipe = async (id) => {
+  const db = await connection();
+  await db.collection('recipes')
+  .deleteOne({ _id: ObjectId(id) });
+};
 
 module.exports = {
   getAllRecipes,
   getbyIdRecipes,
   createRecipe,
+  updateRecipe,
+  excludeRecipe,
 };

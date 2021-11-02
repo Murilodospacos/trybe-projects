@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const recipesControllers = require('../controllers/recipesControllers');
-const { 
+const {
+  isValidateAuthorization, 
   isValidateToken,
 } = require('../midllewares/validateToken');
 const {
@@ -18,5 +19,11 @@ router.post('/',
   isvalidateIngredientsRecipe,
   isValidatePreparationRecipe,
   recipesControllers.createRecipes);
+router.put('/:id',
+  isValidateToken,
+  isValidateAuthorization,
+  recipesControllers.updateRecipe);
+
+router.delete('/:id', isValidateToken, isValidateAuthorization, recipesControllers.deleteRecipe);
 
 module.exports = router;
