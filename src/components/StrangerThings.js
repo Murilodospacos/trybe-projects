@@ -146,7 +146,7 @@ class StrangerThings extends React.Component {
           </div>
         </div>
         { JSON.parse(process.env.REACT_APP_DEVELOPMENT)
-          ? <h2>Em Desenvolvimento</h2> : '' }
+          ? <h2>Em desenvolvimento</h2> : '' }
       </div>
     );
   }
