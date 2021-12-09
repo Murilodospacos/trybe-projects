@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Web Chat</title>
+    <link rel="stylesheet" href="./css/chat.css">
+  </head>
+  <body>
+    <section id="info-users">
+      <div id="insert-salve-nickName">
+        <input
+        id="nickName"
+        type="text"
+        data-testid="nickname-box"
+        placeholder="Insira seu nick name"
+       />
+        <button data-testid="nickname-button" >
+          Salvar
+        </button>
+      </div>
+      <div id="users-online-container">
+        <ul id="list-users-online" >Users Online</ul>
+      </div>
+    </section>
+
+
+  <section id="frame-message">
+    <ul id="list-messages"></ul>
+  </section>  
+  <section>
+    <form id="form">
+      <input id="message-input" data-testid="message-box" />
+      <button data-testid="send-button" >Enviar</button>
+    </form>
+  </section>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src='./js/clientChat.js'></script>
+  </body>
+</html>
