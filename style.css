@@ -6,6 +6,7 @@
 body {
   background-color: rgb(0 , 162 , 255);
   font-family: 'Indie Flower', sans-serif;
+  text-align: center;
 }
 
 h1 {
@@ -54,6 +55,7 @@ li {
 
 main {
   padding: 20px;
+  text-align: center;
 }
 
 .completed {
