@@ -1,0 +1,7 @@
+3º envia mensagem para todos clientes - Mauricio me ajudou
+https://date-fns.org/docs/Getting-Started#installation
+
+1- gerar o id aleatório front-end/client.
+2- Enviar par o servidor.
+3- Armazenar em um array, enviar para todos clientes.
+4- Renderizar na tela os usuarios.

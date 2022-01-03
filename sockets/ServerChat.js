@@ -1,14 +1,30 @@
 const { format } = require('date-fns');
 
-module.exports = (io) => io.on('connection', (socket) => {
-  console.log(`usuário ${socket.id} conectado`);
+const usersNickName = {};
 
-    // 2º recebe mensagem do cliente
+function newUser(socket, io) {
+  return ({ nickname }) => {
+    usersNickName[socket.id] = nickname;
+    io.emit('userOnline', usersNickName);
+  };
+}
+
+module.exports = (io) => io.on('connection', (socket) => {
+  socket.on('userOnline', newUser(socket, io));
+
+  socket.emit('userOnline', usersNickName);
+
   socket.on('message', (msg) => {
-    // 3º envia mensagem para todos clientes
-    // mauricio me ajudou
-    // https://date-fns.org/docs/Getting-Started#installation
     io.emit('message',
     `${format(new Date(), 'dd-MM-yyyy HH:mm:ss')} ${msg.nickname}: ${msg.chatMessage}`);
   });
+
+  socket.on('updateNickName', (dataNickName) => {
+    // 3º envia mensagem para todos clientes
+    io.emit('updateNickName', dataNickName);
+  });
+
+  // socket.on('disconnect', () => {
+  //   io.emit('removeUser', username);
+  // });
 });
