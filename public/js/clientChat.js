@@ -5,6 +5,7 @@ const form = document.querySelector('form');
 const inputMessage = document.querySelector('#message-input');
 const inputNickname = document.querySelector('#input-nickname');
 const btnSalvar = document.querySelector('#btn-salvar');
+// const onlineUser = document.getElementById('online-user');
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -49,9 +50,10 @@ const createUserList = (dataNickNames, id) => {
   usersUl.appendChild(li);
 };
 
+console.log(socket.id);
 const user = sessionStorage.getItem('username') || socket.id.slice(-16);
 sessionStorage.setItem('username', user);
-
+console.log(user);
 socket.emit('userOnline', { user });
 
 socket.on('userOnline', (data) => {
@@ -72,11 +74,3 @@ socket.on('addLoggedUser', (data) => {
 socket.on('updateNickName', (dataUser) => {
   createUserList(dataUser);
 });
-
-// window.onload = () => {
-//   setTimeout(() => { 
-    
-//     sessionStorage.setItem('username', randomUser);
-//     socket.emit('userOnline', randomUser);
-//   }, 200);
-//  };

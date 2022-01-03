@@ -1,71 +1,72 @@
 * {
   margin: 0;
-  padding: 0;
   box-sizing: border-box;
+  padding: 0;
 }
 
 body {
-  font: 13px Helvetica, Arial;
   border: 2px solid black;
+  font-size: 13px;
+  font-family: Helvetica, sans-serif;
 }
 
 form {
+  background: black;
   border: 2px solid black;
-  background: #000;
   padding: 3px;
-  position: fixed;
   bottom: 0;
+  position: fixed;
   width: 100%;
 }
 
 form input {
   border: 0;
   padding: 10px;
-  width: 90%;
   margin-right: 0.5%;
+  width: 90%;
 }
 
 form button {
-  width: 9%;
   background: rgb(130, 224, 255);
+  width: 9%;
   border: none;
-  padding: 10px;
   cursor: pointer;
+  padding: 10px;
 }
 
-#list-messages {
+#messages {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
 
-#list-messages li {
+#messages li {
   padding: 5px 10px;
 }
 
-#list-messages li:nth-child(odd) {
+#messages li:nth-child(odd) {
   background: #eee;
 }
 
 #addNickName {
-  background: #000;
+  background: black;
   padding: 3px;
-  position: fixed;
   bottom: 0;
+  position: fixed;
   width: 100%;
 }
 
 #addNickName input {
   border: 0;
   padding: 10px;
-  width: 90%;
   margin-right: 0.5%;
+  width: 90%;
 }
 
 #addNickName button {
-  width: 9%;
   background: rgb(130, 224, 255);
+  width: 9%;
   border: none;
-  padding: 10px;
   cursor: pointer;
+  padding: 10px;
 }
