@@ -34,7 +34,7 @@ btnSalvar.addEventListener('click', (event) => {
 });
 
 const createNewMessage = (message) => {
-  const messagesUl = document.querySelector('#messages');
+  const messagesUl = document.querySelector('.messages');
   const li = document.createElement('li');
   li.innerText = message;
   li.setAttribute(datatestId, 'message');
@@ -50,11 +50,11 @@ const createUserList = (dataNickNames, id) => {
   usersUl.appendChild(li);
 };
 
-console.log(socket.id);
-const user = sessionStorage.getItem('username') || socket.id.slice(-16);
-sessionStorage.setItem('username', user);
-console.log(user);
-socket.emit('userOnline', { user });
+socket.on('connect', () => {
+  const user = socket.id.slice(-16) || sessionStorage.getItem('username');
+  sessionStorage.setItem('username', user);
+  socket.emit('userOnline', { user });
+});
 
 socket.on('userOnline', (data) => {
   sessionStorage.setItem('username', data);

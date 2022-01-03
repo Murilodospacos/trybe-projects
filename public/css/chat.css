@@ -1,72 +1,72 @@
 * {
-  margin: 0;
   box-sizing: border-box;
+  margin: 0;
   padding: 0;
 }
 
 body {
   border: 2px solid black;
-  font-size: 13px;
   font-family: Helvetica, sans-serif;
+  font-size: 13px;
 }
 
 form {
   background: black;
   border: 2px solid black;
-  padding: 3px;
   bottom: 0;
+  padding: 3px;
   position: fixed;
   width: 100%;
 }
 
 form input {
   border: 0;
-  padding: 10px;
   margin-right: 0.5%;
+  padding: 10px;
   width: 90%;
 }
 
 form button {
   background: rgb(130, 224, 255);
-  width: 9%;
   border: none;
+  width: 9%;
   cursor: pointer;
   padding: 10px;
 }
 
-#messages {
+.messages {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
 
-#messages li {
+.messages li {
   padding: 5px 10px;
 }
 
-#messages li:nth-child(odd) {
+.messages li:nth-child(odd) {
   background: #eee;
 }
 
 #addNickName {
   background: black;
-  padding: 3px;
   bottom: 0;
+  padding: 3px;
   position: fixed;
   width: 100%;
 }
 
 #addNickName input {
   border: 0;
-  padding: 10px;
   margin-right: 0.5%;
+  padding: 10px;
   width: 90%;
 }
 
 #addNickName button {
   background: rgb(130, 224, 255);
-  width: 9%;
   border: none;
+  width: 9%;
   cursor: pointer;
   padding: 10px;
 }
