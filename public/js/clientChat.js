@@ -1,15 +1,14 @@
-const socket = window.io();
+const socket = window.io('http://localhost:3000');
 
-const datatestId = 'datatestId';
-const form = document.querySelector('form');
+const datatestId = 'data-testid';
+const form = document.querySelector('#form');
 const inputMessage = document.querySelector('#message-input');
 const inputNickname = document.querySelector('#input-nickname');
-const btnSalvar = document.querySelector('#btn-salvar');
-// const onlineUser = document.getElementById('online-user');
+const nicknameForm = document.querySelector('#nickName-form');
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  const newNickname = sessionStorage.getItem('username');
+  const newNickname = sessionStorage.nickname;
     if (inputMessage.value) {
       socket.emit('message', {
         chatMessage: inputMessage.value,
@@ -20,17 +19,26 @@ form.addEventListener('submit', (e) => {
     return false;
 });
 
-btnSalvar.addEventListener('click', (event) => {
+nicknameForm.addEventListener('submit', (event) => {
   event.preventDefault();
-  sessionStorage.setItem('username', inputNickname.value);
-  const data = sessionStorage.getItem('username');
-  if (inputNickname.value) {
-    socket.emit('updateNickName', data);
-  } else {
-    socket.emit('updateNickName', inputNickname.value);
-  }
-  inputNickname.value = '';
-  return false;
+  
+  const inputValue = inputNickname.value;
+  const username = document.querySelector('#online-user');
+  username.innerText = inputValue;
+  socket.emit('updateNickName', {
+  oldNickName: sessionStorage.nickname,
+  newNickName: inputValue,
+  });
+  sessionStorage.setItem('nickname', inputValue);
+});
+
+socket.on('updateNick', (oldNickName, newNickName) => {
+  const getUsers = document.querySelectorAll('#online-user');
+  getUsers.forEach((value) => {
+    if (value.innerText === oldNickName) {
+      value.innerText = newNickName;
+    }
+  });
 });
 
 const createNewMessage = (message) => {
@@ -41,36 +49,28 @@ const createNewMessage = (message) => {
   messagesUl.appendChild(li);
 };
 
-const createUserList = (dataNickNames, id) => {
+const createUserList = (dataNickNames) => {
   const usersUl = document.querySelector('#list-users-online');
   const li = document.createElement('li');
   li.innerText = dataNickNames;
   li.setAttribute(datatestId, 'online-user');
-  li.setAttribute('id', id);
   usersUl.appendChild(li);
 };
 
-socket.on('connect', () => {
-  const user = socket.id.slice(-16) || sessionStorage.getItem('username');
-  sessionStorage.setItem('username', user);
-  socket.emit('userOnline', { user });
+socket.on('connection', (id) => {
+  createUserList(id);
 });
 
 socket.on('userOnline', (data) => {
-  sessionStorage.setItem('username', data);
-  createUserList(data);
+  // adicionando o ultimo usuario
+  const lastIndex = data[data.length - 1];
+  sessionStorage.setItem('nickname', lastIndex);
+  createUserList(lastIndex);
+  for (let i = 0; i < data.length - 1; i += 1) {
+    createUserList(data[i]);
+  }
 });
 
 socket.on('message', (msg) => {
 createNewMessage(msg);
-});
-
-socket.on('addLoggedUser', (data) => {
-  createUserList(data);
-  const username = sessionStorage.getItem('username');
-  socket.emit('addLoggedUser', username);
-});
-
-socket.on('updateNickName', (dataUser) => {
-  createUserList(dataUser);
 });

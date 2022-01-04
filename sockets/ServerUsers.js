@@ -1,23 +1,17 @@
-const usersNickName = {};
-
-function newUser(socket, io) {
-  return ({ nickname }) => {
-    usersNickName[socket.id] = nickname;
-    io.emit('userOnline', usersNickName);
-  };
-}
+let arrayUsersOnline = [];
 
 module.exports = (io) => io.on('connection', (socket) => {
-  socket.on('userOnline', newUser(socket, io));
+  let id = socket.id.slice(-16);
+  arrayUsersOnline.push(id);
 
-  socket.emit('userOnline', usersNickName);
+  socket.broadcast.emit('connection', id);
 
-  socket.on('updateNickName', (dataNickName) => {
-    // 3º envia mensagem para todos clientes
-    io.emit('updateNickName', dataNickName);
+  socket.emit('userOnline', arrayUsersOnline);
+
+  socket.on('updateNickName', ({ oldNickName, newNickName }) => {
+    id = newNickName;
+    arrayUsersOnline = arrayUsersOnline.map((item) => (item === oldNickName ? newNickName : item));
+
+    socket.broadcast.emit('updateNick', oldNickName, newNickName);
   });
-
-    // socket.on('disconnect', () => {
-  //   io.emit('removeUser', username);
-  // });
 });

@@ -6,38 +6,42 @@
   </head>
   <body>
     <header>
-      <h3>Olá, <span id="online-user"></span></h3>
+      <h1 class="user-online-h1"> Web Chat TRYBE</h1>
+      <h3 class="user-online-h3">Olá, <span id="online-user"></span></h3>
     </header>
-    <section id="info-users">
-      <div id="insert-salve-nickName">
-        <input
-        id="input-nickname"
-        type="text"
-        data-testid="nickname-box"
-        placeholder="Insira seu nick name"
-       />
-        <button id="btn-salvar" data-testid="nickname-button" >
-          Salvar
-        </button>
-      </div>
-      <div id="users-online-container">
-        <h2>Users Online</h2>
-        <ul id="list-users-online" >
-        </ul>
-      </div>
-    </section>
+    <main>
+      <section class="info-users-online">
+          <form id="nickName-form">
+            <input
+            id="input-nickname"
+            type="text"
+            data-testid="nickname-box"
+            placeholder="Insira seu nick name"
+            />
+            <button id="btn-salvar" type="submit" data-testid="nickname-button" >
+              Salvar
+            </button>
+          </form>
+        <div id="users-online-container">
+          <h2>Users Online</h2>
+          <ul id="list-users-online" >
+          </ul>
+        </div>
+      </section>
+      
+      <section>
+        <div id="frame-message">
+          <ul class="messages"></ul>
+        </div>
+        
+        <form id="form">
+          <input id="message-input" data-testid="message-box" />
+          <button data-testid="send-button" >Enviar</button>
+        </form>
+      </section>
+    </main>
 
-
-  <section id="frame-message">
-    <ul class="messages"></ul>
-  </section>  
-  <section>
-    <form id="form">
-      <input id="message-input" data-testid="message-box" />
-      <button data-testid="send-button" >Enviar</button>
-    </form>
-  </section>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src='./js/clientChat.js'></script>
-  </body>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src='./js/clientChat.js'></script>
+      </body>
 </html>
