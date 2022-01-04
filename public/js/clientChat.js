@@ -90,3 +90,16 @@ socket.on('disconected', (id) => {
     }
   });
 });
+
+const fetchChat = async () => {
+  const fetchdata = await fetch('http://localhost:3000/chatweb');
+  const response = await fetchdata.json();
+  for (let index = 0; index < response.length; index += 1) {
+    const li = document.createElement('li');
+    li.innerText = `
+    ${response[index].timestamp}${response[index].nickname}${response[index].message}`;
+    document.querySelector('.messages').appendChild(li);
+  }
+};
+
+fetchChat();
