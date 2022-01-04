@@ -11,15 +11,15 @@ body {
 }
 
 main {
+  display: flex;
   height: 92vh;
   width: 100%;
-  display: flex;
 }
 
 .user-online-h1 {
-  text-align: center;
   color: rgb(130, 224, 255);
   background-color: black;
+  text-align: center;
 }
 
 .user-online-h3 {

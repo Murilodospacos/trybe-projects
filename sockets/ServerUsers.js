@@ -14,4 +14,9 @@ module.exports = (io) => io.on('connection', (socket) => {
 
     socket.broadcast.emit('updateNick', oldNickName, newNickName);
   });
+
+  socket.on('disconnect', () => {
+    arrayUsersOnline = arrayUsersOnline.filter((element) => element !== id);
+    socket.broadcast.emit('disconected', id);
+  });
 });

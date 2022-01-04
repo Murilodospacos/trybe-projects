@@ -5,3 +5,6 @@ https://date-fns.org/docs/Getting-Started#installation
 2- Enviar par o servidor.
 3- Armazenar em um array, enviar para todos clientes.
 4- Renderizar na tela os usuarios.
+
+Requesito 2 
+- Tive ajuda do Rodolfo Rezende e Antônio Schappo.
