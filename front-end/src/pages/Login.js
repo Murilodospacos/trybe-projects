@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 
 function Login() {
@@ -82,7 +83,7 @@ function Login() {
         </button>
       </div>
       { error && <div data-testid="common_login__element-invalid-email">{ error }</div> }
-      { isToken }
+      { isToken && <Redirect to="/customer/products" /> }
     </div>
   );
 }
