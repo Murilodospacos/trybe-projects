@@ -32,7 +32,7 @@ function Login() {
         <br />
         <button
           data-testid="common_login__button-register"
-          type="submit"
+          type="button"
         >
           Ainda não tenho conta
         </button>
