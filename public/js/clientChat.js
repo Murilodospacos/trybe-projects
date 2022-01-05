@@ -10,14 +10,12 @@ const nicknameForm = document.querySelector('#nickName-form');
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   const newNickname = sessionStorage.nickname;
-    if (inputMessage.value) {
-      socket.emit('message', {
-        chatMessage: inputMessage.value,
-        nickname: newNickname,
-      });
-      inputMessage.value = '';
-    }
-    return false;
+  socket.emit('message', {
+    chatMessage: inputMessage.value,
+    nickname: newNickname,
+  });
+      
+  inputMessage.value = '';
 });
 
 nicknameForm.addEventListener('submit', (event) => {
@@ -62,19 +60,22 @@ const createUserList = (dataNickNames) => {
   usersUl.appendChild(li);
 };
 
-socket.on('connection', (id) => {
-  createUserList(id);
+socket.on('connectionNewUser', (id) => {
+  createUserList(id);  
 });
 
-socket.on('userOnline', (data) => {
-  // adicionando o ultimo usuario
-  const lastIndex = data[data.length - 1];
-  sessionStorage.setItem('nickname', lastIndex);
-  createUserList(lastIndex);
-  for (let i = 0; i < data.length - 1; i += 1) {
-    createUserList(data[i]);
-  }
-});
+const conectionUser = () => {
+  socket.on('userOnline', (data) => {
+    // adicionando o ultimo usuario
+    console.log(data, 'DATA');
+    const lastIndex = data[data.length - 1];
+    sessionStorage.setItem('nickname', lastIndex);
+    createUserList(lastIndex);
+    for (let i = 0; i < data.length - 1; i += 1) {
+      createUserList(data[i]);
+    }
+  });
+};
 
 socket.on('message', (msg) => {
 createNewMessage(msg);
@@ -92,14 +93,20 @@ socket.on('disconected', (id) => {
 });
 
 const fetchChat = async () => {
-  const fetchdata = await fetch('http://localhost:3000/chatweb');
+  const fetchdata = await fetch('http://localhost:3000/chat');
   const response = await fetchdata.json();
+  console.log(response, 'FETCHAT');
   for (let index = 0; index < response.length; index += 1) {
     const li = document.createElement('li');
+    li.setAttribute('data-testid', 'message'); 
     li.innerText = `
-    ${response[index].timestamp}${response[index].nickname}${response[index].message}`;
+    ${response[index].timestamp} - ${response[index].nickname}: ${response[index].message}`;
     document.querySelector('.messages').appendChild(li);
   }
 };
 
 fetchChat();
+
+window.onload = () => {
+  conectionUser();
+};

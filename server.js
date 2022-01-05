@@ -13,7 +13,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', chatController);
 
-require('./sockets/ServerChat')(io);
 require('./sockets/ServerUsers')(io);
 
 const PORT = 3000;
