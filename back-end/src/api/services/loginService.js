@@ -1,9 +1,9 @@
 const jwt = require('jsonwebtoken');
+const md5 = require('md5');
 const { users } = require('../../database/models');
-const md5 = require('md5')
 
 const loginValidation = async (email, password) => {
-  const hashPassword = md5(password)
+  const hashPassword = md5(password);
   console.log(hashPassword);
   const userExists = await users.findOne({ where: { email, password: hashPassword } });
 
@@ -20,4 +20,4 @@ const loginValidation = async (email, password) => {
 
 module.exports = {
   loginValidation,
-}
+};
