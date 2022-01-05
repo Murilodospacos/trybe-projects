@@ -1,6 +1,6 @@
 import React from 'react';
-import './App.css';
 import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom';
+import './App.css';
 import rockGlass from './images/rockGlass.svg';
 import Login from './pages/Login';
 
