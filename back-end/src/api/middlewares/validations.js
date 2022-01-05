@@ -1,7 +1,6 @@
 const Joi = require('joi');
 
 const loginValidate = async (req, res, next) => {
-  console.log(req.body);
   const schema = Joi.object({
     email: Joi.string().required().min(3).max(50),
     password: Joi.string().required().min(5).max(200),
