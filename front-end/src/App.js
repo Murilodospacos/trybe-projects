@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
-import rockGlass from './images/rockGlass.svg';
 import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom';
-import Login from './pages/Login'
+import rockGlass from './images/rockGlass.svg';
+import Login from './pages/Login';
 
 function App() {
   return (
@@ -13,11 +13,10 @@ function App() {
       </object>
       <BrowserRouter>
         <Switch>
-          <Route>
-            <Redirect exact from="/" to="/login" component={Login} />
-          </Route>
+          <Route exact path="/"><Redirect to="/login" /></Route>
+          <Route exact path="/login" component={ Login } />
         </Switch>
-    </BrowserRouter>
+      </BrowserRouter>
     </div>
   );
 }
