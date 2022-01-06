@@ -1,0 +1,91 @@
+import axios from 'axios';
+import { Redirect } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+
+function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [disabled, setDisabled] = useState(true);
+  const [isToken, setToken] = useState(false);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    function loginValidation() {
+      const mailCheck = email.split('').includes('@') && email.split('.').includes('com');
+      const MAX_LENGTH = 5;
+      const passwordLength = password.length > MAX_LENGTH;
+      if (passwordLength && mailCheck && disabled) {
+        setDisabled(false);
+      } else if ((!passwordLength || !mailCheck) && !disabled) {
+        setDisabled(true);
+      }
+    }
+    loginValidation();
+  }, [email, password, disabled]);
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    try {
+      const token = await axios.post('http://localhost:3001/login', { email, password });
+      localStorage.setItem('token', token.data.token);
+      setToken(true);
+      return token.data.token;
+    } catch (erro) {
+      setError(erro.response.data.message);
+    }
+  }
+
+  return (
+    <div>
+      <h2>Login Page</h2>
+      <div>
+        <form>
+          <label htmlFor="login">
+            Login
+            <br />
+            <input
+              data-testid="common_login__input-email"
+              type="email"
+              placeholder="digite o seu email"
+              value={ email }
+              onChange={ (event) => setEmail(event.target.value) }
+            />
+          </label>
+          <br />
+          <label htmlFor="senha">
+            Senha
+            <br />
+            <input
+              data-testid="common_login__input-password"
+              type="password"
+              placeholder="digite a sua senha"
+              value={ password }
+              onChange={ (event) => setPassword(event.target.value) }
+            />
+          </label>
+        </form>
+        <br />
+        <button
+          data-testid="common_login__button-login"
+          type="submit"
+          disabled={ disabled }
+          onClick={ handleSubmit }
+        >
+          LOGIN
+        </button>
+        <br />
+        <br />
+        <button
+          data-testid="common_login__button-register"
+          type="button"
+        >
+          Ainda não tenho conta
+        </button>
+      </div>
+      { error && <div data-testid="common_login__element-invalid-email">{ error }</div> }
+      { isToken && <Redirect to="/customer/products" /> }
+    </div>
+  );
+}
+
+export default Login;
