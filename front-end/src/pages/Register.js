@@ -14,7 +14,7 @@ function Register() {
   useEffect(() => {
     function loginValidation() {
       const NAME_LENGTH = 12;
-      const nameCheck = name.length < NAME_LENGTH;
+      const nameCheck = name.length > NAME_LENGTH;
       const mailCheck = email.split('').includes('@') && email.split('.').includes('com');
       const MAX_LENGTH = 5;
       const passwordLength = password.length > MAX_LENGTH;
@@ -30,10 +30,10 @@ function Register() {
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      const token = await axios.post('http://localhost:3001/register', { name, email, password });
+      const user = await axios.post('http://localhost:3001/register', { name, email, password });
       localStorage.setItem('token', token.data.token);
       setToken(true);
-      return token.data.token;
+      return user;
     } catch (erro) {
       setError(erro.response.data.message);
     }
