@@ -23,7 +23,7 @@ const registerValidation = async (req, res, next) => {
     return res.status(400).json({ message: 'Invalid entries. Try again.' });
   }
   next();
-}
+};
 
 module.exports = {
   loginValidate,

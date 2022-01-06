@@ -30,7 +30,7 @@ function Register() {
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      const user = await axios.post('http://localhost:3001/register', { name, email, password });
+      const token = await axios.post('http://localhost:3001/register', { name, email, password });
       localStorage.setItem('token', token.data.token);
       setToken(true);
       return user;
