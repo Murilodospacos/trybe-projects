@@ -14,7 +14,7 @@ function NavCustomer() {
       <div>
         <button
           type="button"
-          data-testeid="customer_products__element-navbar-link-orders"
+          data-testid="customer_products__element-navbar-link-orders"
         >
           Meus Pedidos
         </button>
