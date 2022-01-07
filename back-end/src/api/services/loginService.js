@@ -15,7 +15,7 @@ const loginValidation = async (email, password) => {
   // }, process.env.JWT_SECRET);
   
   // return { token: createToken };
-  return { token: email };
+  return { userExists };
 };
 
 module.exports = {
