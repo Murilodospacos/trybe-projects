@@ -26,12 +26,11 @@ function Login() {
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      const token = await axios.post('http://localhost:3001/login', { email, password });
-      localStorage.setItem('token', token.data.token);
+      const response = await axios.post('http://localhost:3001/login', { email, password });
       setToken(true);
-      return token.data.token;
+      return response;
     } catch (erro) {
-      setError(erro.response.data.message);
+      setError(erro.message);
     }
   }
 

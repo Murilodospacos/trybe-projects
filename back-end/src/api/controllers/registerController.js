@@ -1,18 +1,18 @@
 const registerService = require('../services/registerService');
-const { users } = require('../../database/models');
 
 const createUser = async (req, res) => {
+  // console.log('CHEGUEI NO CONTROLLER');
   try {
     const { name, email, password } = req.body;
     const role = 'customer';
-    const result = await registerService.createUser(name, email, password, role);
-
-    const userExists = await users.findOne({ where: { email, password } });
-
-    if (userExists) return res.status(409).json({ message: 'User already exists!' });
+    const result = await registerService.createNewUser(name, email, password, role);
 
     if (!result) {
       return res.status(404).json({ message: 'Invalid entries. Try again.' });
+    }
+    
+    if (result.message) {
+      return res.status(result.statusCode).json(result.message);
     }
 
     res.status(201).json(result);

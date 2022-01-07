@@ -3,12 +3,11 @@ import { Redirect } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 
 function Register() {
-  const hiddenId = 'common_register__element-invalid_register';
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [disabled, setDisabled] = useState(true);
-  const [isToken, setToken] = useState(false);
+  const [userRedirect, setUserRedirect] = useState(false);
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -27,16 +26,19 @@ function Register() {
     loginValidation();
   }, [name, email, password, disabled]);
 
+  async function registerFunction() {
+    try {
+      const response = await axios.post('http://localhost:3001/register', { name, email, password });
+      if (response) setUserRedirect(true);
+      return response;
+    } catch (erro) {
+      setError(erro.message);
+    }
+  }
+
   async function handleSubmit(event) {
     event.preventDefault();
-    try {
-      const token = await axios.post('http://localhost:3001/register', { name, email, password });
-      localStorage.setItem('token', token.data.token);
-      setToken(true);
-      return user;
-    } catch (erro) {
-      setError(erro.response.data.message);
-    }
+    await registerFunction();
   }
 
   return (
@@ -83,11 +85,11 @@ function Register() {
         </button>
       </form>
       { error && (
-        <div data-testid={ hiddenId }>
+        <div data-testid="common_register__element-invalid_register">
           { error }
         </div>
       ) }
-      { isToken && <Redirect to="/customer/products" /> }
+      { userRedirect && <Redirect to="/customer/products" /> }
     </div>
   );
 }
