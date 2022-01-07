@@ -1,6 +1,8 @@
-import axios from 'axios';
-import { Redirect, Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
+import { Redirect, Link } from 'react-router-dom';
+import axios from 'axios';
+import '../App.css';
+import rockGlass from '../images/rockGlass.svg';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -8,6 +10,12 @@ function Login() {
   const [disabled, setDisabled] = useState(true);
   const [isToken, setToken] = useState(false);
   const [error, setError] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem('user')) {
+      setToken(true);
+    }
+  }, []);
 
   useEffect(() => {
     function loginValidation() {
@@ -27,6 +35,11 @@ function Login() {
     event.preventDefault();
     try {
       const response = await axios.post('http://localhost:3001/login', { email, password });
+      localStorage.setItem('user', JSON.stringify({
+        name: response.data.userExists.name,
+        role: response.data.userExists.role,
+        token: response.data.token,
+      }));
       setToken(true);
       return response;
     } catch (erro) {
@@ -36,6 +49,10 @@ function Login() {
 
   return (
     <div>
+      <span className="logo">TRYBE</span>
+      <object className="rocksGlass" type="image/svg+xml" data={ rockGlass }>
+        Glass
+      </object>
       <h2>Login Page</h2>
       <div>
         <form>
