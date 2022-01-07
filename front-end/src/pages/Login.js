@@ -10,6 +10,7 @@ function Login() {
   const [disabled, setDisabled] = useState(true);
   const [isToken, setToken] = useState(false);
   const [error, setError] = useState(false);
+  const [isRole, setRole] = useState(null);
 
   useEffect(() => {
     if (localStorage.getItem('user')) {
@@ -40,12 +41,19 @@ function Login() {
         role: response.data.userExists.role,
         token: response.data.token,
       }));
+      setRole(response.data.userExists.role);
       setToken(true);
       return response;
     } catch (erro) {
       setError(erro.message);
     }
   }
+
+  const handlePath = {
+    customer: '/customer/products',
+    seller: '/seller/orders',
+    administrator: '/admin/manage',
+  };
 
   return (
     <div>
@@ -101,7 +109,7 @@ function Login() {
         </Link>
       </div>
       { error && <div data-testid="common_login__element-invalid-email">{ error }</div> }
-      { isToken && <Redirect to="/customer/products" /> }
+      { isToken && <Redirect to={ handlePath[isRole] } /> }
     </div>
   );
 }
