@@ -9,7 +9,7 @@ const products = async (_req, res) => {
     return res.status(200).json(result);
   } catch (error) {
     return res.status(400).json(console.log(error));
-  };
+  }
 };
 
 module.exports = {
