@@ -1,10 +1,13 @@
 import React from 'react';
 import { useHistory, Redirect } from 'react-router-dom';
+import NavCustomer from './NavCustomer';
+import NavSeller from './NavSeller';
+import NavAdm from './NavAdm';
 
 function Navbar() {
   const [isLocal, setLocal] = React.useState(false);
-  const [isRole, setRole] = React.useState('');
   const [isName, setName] = React.useState('');
+  const [isRole, setRole] = React.useState('');
   const history = useHistory();
 
   const logout = () => {
@@ -23,109 +26,32 @@ function Navbar() {
     }
   }, []);
 
-  const navbarFunction = (param) => {
-    if (param === 'customer') {
-      return (
-        <navbar>
-          <div>
-            <button
-              type="button"
-              data-testid="customer_products__element-navbar-link-products"
-            >
-              Produtos
-            </button>
-          </div>
-          <div>
-            <button
-              type="button"
-              data-testeid="customer_products__element-navbar-link-orders"
-            >
-              Meus Pedidos
-            </button>
-          </div>
-          <div>
-            <h2
-              data-testid="customer_products__element-navbar-user-full-name"
-            >
-              { isName }
-            </h2>
-          </div>
-          <div>
-            <button
-              type="button"
-              data-testid="customer_products__element-navbar-link-logout"
-              onClick={ logout }
-            >
-              Sair
-            </button>
-          </div>
-        </navbar>);
-    }
-    if (param === 'seller') {
-      return (
-        <navbar>
-          <div>
-            <button
-              type="button"
-              data-testeid="customer_products__element-navbar-link-orders"
-            >
-              Meus Pedidos
-            </button>
-          </div>
-          <div>
-            <h2
-              type="button"
-              data-testid="customer_products__element-navbar-user-full-name"
-            >
-              { isName }
-            </h2>
-          </div>
-          <div>
-            <button
-              type="button"
-              data-testid="customer_products__element-navbar-link-logout"
-              onClick={ logout }
-            >
-              Sair
-            </button>
-          </div>
-        </navbar>);
-    }
-    if (param === 'administrator') {
-      return (
-        <navbar>
-          <div>
-            <button
-              type="button"
-            >
-              Gerenciar Usuários
-            </button>
-          </div>
-          <div>
-            <h2
-              data-testid="customer_products__element-navbar-user-full-name"
-            >
-              { isName }
-            </h2>
-          </div>
-          <div>
-            <button
-              type="button"
-              data-testid="customer_products__element-navbar-link-logout"
-              onClick={ logout }
-            >
-              Sair
-            </button>
-          </div>
-        </navbar>);
-    }
+  if (isLocal) {
+    return <Redirect to="/" />;
+  }
+  const obj = {
+    customer: <NavCustomer />,
+    administrator: <NavAdm />,
+    seller: <NavSeller />,
   };
-
   return (
-    <div>
-      { isLocal && <Redirect to="/" /> }
-      { navbarFunction(isRole) }
-    </div>
+    <navbar>
+      { obj[isRole] }
+      <div>
+        <h2 data-testid="customer_products__element-navbar-user-full-name">
+          {isName}
+        </h2>
+      </div>
+      <div>
+        <button
+          type="button"
+          data-testid="customer_products__element-navbar-link-logout"
+          onClick={ logout }
+        >
+          Sair
+        </button>
+      </div>
+    </navbar>
   );
 }
 
