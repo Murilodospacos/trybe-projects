@@ -1,9 +1,12 @@
-const _ = require('lodash')
-const { sales } = require('../../database/models');;
+const _ = require('lodash');
+
+const { sales } = require('../../database/models');
 
 const changeKeysCase = (obj) => {
   const newObj = {};
-  Object.keys(obj).forEach((k) => (newObj[_.camelCase(k)] = obj[k]));
+  Object.keys(obj).forEach(function(k){
+    (newObj[_.camelCase(k)] = obj[k]);
+  });
   return newObj;
 };
 
