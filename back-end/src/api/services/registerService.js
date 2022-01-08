@@ -16,9 +16,8 @@ const createNewUser = async ({ name, email, password, role }) => {
     const loginNewUserRegister = LoginService.loginValidation(email, password);
   
     return loginNewUserRegister;
-    
   } catch (error) {
-    console.log(error.message)
+    console.log(error.message);
   }
 };
 
