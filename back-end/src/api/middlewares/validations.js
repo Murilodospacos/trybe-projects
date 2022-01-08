@@ -22,6 +22,7 @@ const registerValidation = async (req, res, next) => {
   if (error && error.details.find((erro) => (erro))) {
     return res.status(400).json({ message: 'Invalid entries. Try again.' });
   }
+  
   next();
 };
 
