@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 
 function SaleCard({ sale }) {
   const { id, totalPrice, deliveryAddress, deliveryNumber, saleDate, status } = sale;
+  const date = new Date(saleDate);
+  const formatDate = `${date.getDate()}/${(date.getMonth() + 1)}/${date.getFullYear()}`;
+  console.log(formatDate);
   const testId = {
     48: 'seller_orders__element-order-id-',
     49: 'seller_orders__element-delivery-status-',
@@ -20,7 +23,7 @@ function SaleCard({ sale }) {
         <p>{status}</p>
       </div>
       <div className="grid-item" data-testid={ `${testId[50]}${id}` }>
-        <p>{saleDate}</p>
+        <p>{formatDate}</p>
       </div>
       <div className="grid-item" data-testid={ `${testId[51]}${id}` }>
         <p>{totalPrice}</p>
@@ -37,7 +40,7 @@ SaleCard.propTypes = {
     id: PropTypes.number.isRequired,
     totalPrice: PropTypes.string.isRequired,
     deliveryAddress: PropTypes.string.isRequired,
-    deliveryNumber: PropTypes.number.isRequired,
+    deliveryNumber: PropTypes.string.isRequired,
     saleDate: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
   }).isRequired,
