@@ -1,22 +1,25 @@
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import SaleCard from './SaleCard';
-
+// useEffect useState
 function SalesList() {
   const [sales, setSales] = useState([]);
-  const testId = 'seller_orders__element-order-date';
-
   const retrieveSales = async () => {
-    axios.get('http://localhost:3001/sales')
-      .then((res) => {
-        const result = res.data;
-        setSales(result);
-      });
+    try {
+      await axios.get('http://localhost:3001/sales')
+        .then((res) => {
+          setSales(res.data);
+        });
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   useEffect(() => {
     retrieveSales();
   }, []);
+
+  const testId = 'seller_orders__element-order-date';
 
   return (
     <div data-testid="sale-list" className="sale-list">
