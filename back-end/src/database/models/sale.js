@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       total_price: DataTypes.DECIMAL(10,2),
       delivery_address: DataTypes.STRING,
       delivery_number: DataTypes.INTEGER,
-      sale_data: DataTypes.DATE,
+      sale_date: DataTypes.DATE,
       status: DataTypes.STRING,
     }, {
       timestamps: false,

@@ -12,7 +12,7 @@ function Navbar() {
 
   const logout = () => {
     localStorage.clear();
-    const path = '/';
+    const path = '/login';
     history.push(path);
   };
 
@@ -35,23 +35,23 @@ function Navbar() {
     seller: <NavSeller />,
   };
   return (
-    <navbar>
+    <nav>
       { obj[isRole] }
       <div>
-        <h2 data-testid="customer_products__element-navbar-user-full-name">
+        <h2 data-testid={ `${isRole}_products__element-navbar-user-full-name` }>
           {isName}
         </h2>
       </div>
       <div>
         <button
           type="button"
-          data-testid="customer_products__element-navbar-link-logout"
+          data-testid={ `${isRole}_products__element-navbar-link-logout` }
           onClick={ logout }
         >
           Sair
         </button>
       </div>
-    </navbar>
+    </nav>
   );
 }
 
