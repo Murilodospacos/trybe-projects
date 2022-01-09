@@ -35,7 +35,7 @@ function Navbar() {
     seller: <NavSeller />,
   };
   return (
-    <navbar>
+    <nav>
       { obj[isRole] }
       <div>
         <h2 data-testid="customer_products__element-navbar-user-full-name">
@@ -51,7 +51,7 @@ function Navbar() {
           Sair
         </button>
       </div>
-    </navbar>
+    </nav>
   );
 }
 
