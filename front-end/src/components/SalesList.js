@@ -19,7 +19,7 @@ function SalesList() {
     retrieveSales();
   }, []);
 
-  const testId = 'seller_orders__element-order-date';
+  const testId = 'seller_orders__element-order-date-';
 
   return (
     <div data-testid="sale-list" className="sale-list">
