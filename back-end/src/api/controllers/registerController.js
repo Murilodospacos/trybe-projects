@@ -1,7 +1,6 @@
 const registerService = require('../services/registerService');
 
 const createUser = async (req, res) => {
-  // console.log('CHEGUEI NO CONTROLLER');
   try {
     const { name, email, password } = req.body;
     const role = 'customer';
