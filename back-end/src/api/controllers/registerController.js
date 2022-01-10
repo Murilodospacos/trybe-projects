@@ -3,10 +3,8 @@ const registerService = require('../services/registerService');
 const createUser = async (req, res) => {
   // console.log('CHEGUEI NO CONTROLLER');
   try {
-    const { name, email, password } = req.body;
     const role = 'customer';
-    const result = await registerService.createNewUser(name, email, password, role);
-
+    const result = await registerService.createNewUser({ ...req.body, role });
     if (!result) {
       return res.status(404).json({ message: 'Invalid entries. Try again.' });
     }

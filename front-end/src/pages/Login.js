@@ -1,6 +1,8 @@
-import axios from 'axios';
-import { Redirect, Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
+import { Redirect, Link } from 'react-router-dom';
+import axios from 'axios';
+import '../App.css';
+import rockGlass from '../images/rockGlass.svg';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -8,6 +10,13 @@ function Login() {
   const [disabled, setDisabled] = useState(true);
   const [isToken, setToken] = useState(false);
   const [error, setError] = useState(false);
+  const [isRole, setRole] = useState(null);
+
+  useEffect(() => {
+    if (localStorage.getItem('user')) {
+      setToken(true);
+    }
+  }, []);
 
   useEffect(() => {
     function loginValidation() {
@@ -27,6 +36,13 @@ function Login() {
     event.preventDefault();
     try {
       const response = await axios.post('http://localhost:3001/login', { email, password });
+      localStorage.setItem('user', JSON.stringify({
+        name: response.data.userExists.name,
+        email: response.data.userExists.email,
+        role: response.data.userExists.role,
+        token: response.data.token,
+      }));
+      setRole(response.data.userExists.role);
       setToken(true);
       return response;
     } catch (erro) {
@@ -34,8 +50,18 @@ function Login() {
     }
   }
 
+  const handlePath = {
+    customer: '/customer/products',
+    seller: '/seller/orders',
+    administrator: '/admin/manage',
+  };
+
   return (
     <div>
+      <span className="logo">TRYBE</span>
+      <object className="rocksGlass" type="image/svg+xml" data={ rockGlass }>
+        Glass
+      </object>
       <h2>Login Page</h2>
       <div>
         <form>
@@ -84,7 +110,7 @@ function Login() {
         </Link>
       </div>
       { error && <div data-testid="common_login__element-invalid-email">{ error }</div> }
-      { isToken && <Redirect to="/customer/products" /> }
+      { isToken && <Redirect to={ handlePath[isRole] } /> }
     </div>
   );
 }

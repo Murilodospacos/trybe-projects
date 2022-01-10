@@ -8,7 +8,6 @@ const login = async (req, res) => {
     if (result.message) {
       return res.status(404).json({ message: 'Invalid entries. Try again.' });
     }
-
     return res.status(200).json(result);
   } catch (error) {
     return error.message;
