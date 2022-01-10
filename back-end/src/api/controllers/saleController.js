@@ -1,6 +1,6 @@
 const saleService = require('../services/saleService');
 
-const sales = async (_req, res) => {
+const allSales = async (_req, res) => {
   try {
     const result = await saleService.getAll();
     if (result.length < 1) {
@@ -13,5 +13,5 @@ const sales = async (_req, res) => {
 };
 
 module.exports = {
-  sales,
+  allSales,
 };
