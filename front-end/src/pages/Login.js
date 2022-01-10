@@ -41,6 +41,7 @@ function Login() {
         email: response.data.userExists.email,
         role: response.data.userExists.role,
         token: response.data.token,
+        id: response.data.userExists.id,
       }));
       setRole(response.data.userExists.role);
       setToken(true);

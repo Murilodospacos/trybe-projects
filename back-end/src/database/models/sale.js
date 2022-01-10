@@ -14,11 +14,11 @@ module.exports = (sequelize, DataTypes) => {
       tablename: 'sales',
     },     
   );
-  //sale.associate = (models) => {
+  // sale.associate = (models) => {
   //  sale.belongsTo( models.user, {
   //    foreignKey: 'id', as: 'user_id',
   //    foreignKey: 'id', as: 'seller_id'
   // })
-  //}
+  // }
   return sale;
 };
