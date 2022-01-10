@@ -33,6 +33,7 @@ function Register() {
       console.log('Aqui');
       localStorage.setItem('user', JSON.stringify({
         name: response.data.userExists.name,
+        email: response.data.userExists.email,
         role: response.data.userExists.role,
         token: response.data.token,
       }));

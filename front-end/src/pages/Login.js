@@ -38,6 +38,7 @@ function Login() {
       const response = await axios.post('http://localhost:3001/login', { email, password });
       localStorage.setItem('user', JSON.stringify({
         name: response.data.userExists.name,
+        email: response.data.userExists.email,
         role: response.data.userExists.role,
         token: response.data.token,
       }));
