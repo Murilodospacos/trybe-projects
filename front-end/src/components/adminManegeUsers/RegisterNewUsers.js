@@ -5,6 +5,7 @@ function RegisterNewUsers() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [userRole, setUserRole] = useState('');
   const [disabled, setDisabled] = useState(true);
   const [error, setError] = useState(false);
 
@@ -15,7 +16,10 @@ function RegisterNewUsers() {
       const mailCheck = email.split('').includes('@') && email.split('.').includes('com');
       const MAX_LENGTH = 5;
       const passwordLength = password.length > MAX_LENGTH;
-      if (nameCheck && passwordLength && mailCheck && disabled) {
+      const { role } = JSON.parse(localStorage.getItem('user'));
+
+      if (nameCheck && passwordLength && mailCheck
+          && disabled && role === 'administrator') {
         setDisabled(false);
       } else if ((!nameCheck || !passwordLength || !mailCheck) && !disabled) {
         setDisabled(true);
@@ -26,7 +30,10 @@ function RegisterNewUsers() {
 
   async function registerFunction() {
     try {
-      const response = await axios.post('http://localhost:3001/admin/manage', { name, email, password });
+      const { token } = JSON.parse(localStorage.getItem('user'));
+      const options = { headers: { Authorization: token } };
+
+      const response = await axios.post('http://localhost:3001/admin/manage', { name, email, password, role: userRole }, { options });
       if (response) setUserRedirect(true);
       return response;
     } catch (erro) {
@@ -74,7 +81,11 @@ function RegisterNewUsers() {
         </label>
 
         <label htmlFor="tipo">
-          <select data-testid="admin_manage__select-role" name="tipo">
+          <select
+            data-testid="admin_manage__select-role"
+            name="tipo"
+            onChange={ (event) => setUserRole(event.target.value) }
+          >
             <option>Cliente</option>
             <option>Vendedor</option>
             <option>Administrador</option>

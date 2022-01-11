@@ -4,6 +4,7 @@ import './App.css';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import AdminManageUsers from './pages/AdminManageUsers';
+import Products from './pages/Products';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route exact path="/login" component={ Login } />
           <Route exact path="/register" component={ Register } />
           <Route exact path="/admin/manage" component={ AdminManageUsers } />
+          <Route exact path="/customer/products" component={ Products } />
         </Switch>
       </BrowserRouter>
     </div>
