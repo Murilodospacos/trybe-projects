@@ -3,11 +3,14 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     price: DataTypes.DECIMAL(10,2),
     url_image: DataTypes.STRING,
-  }, { timestamps: false, tableName: 'products' });
-
-  //product.associate = (models) => {
-  //  product.hasMany(models.sales_products, { foreignKey: 'product_id', as: 'user' });
-  //};
+  },
+  {
+    timestamps: false,
+    tableName: 'products'
+  });
+  product.associate = (models) => {
+   product.hasMany(models.sales_products, { foreignKey: 'product_id', as: 'products' });
+  };
 
   return product;
 };

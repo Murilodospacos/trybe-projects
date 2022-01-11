@@ -1,13 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
-// async function loadProducts() {
-//   const result = await axios.post('http://localhost:3001/sales');
-//   console.log(result.data);
-//   setProducts(result.data);
-// }
+import axios from 'axios';
 
 export default function DeliveryDetailsAddress() {
+  const [data, setData] = React.useState(null);
+
+  function finalizeOrder() {
+    axios.post('http://localhost:3001/sales', data)
+      .then(res => setData(data))
+      .catch(err => console.log(err.data));
+  }
+
   return (
     <section>
       <h2>Detalhes e Endereço para Entrega</h2>
@@ -32,7 +35,7 @@ export default function DeliveryDetailsAddress() {
           <button
             type="button"
             data-testid="customer_checkout__button-submit-order"
-            // onClick={ () => loadProducts() }
+            onClick={ finalizeOrder }
           >
             FINALIZAR PEDIDO
           </button>
