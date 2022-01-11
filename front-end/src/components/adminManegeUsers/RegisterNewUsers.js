@@ -6,7 +6,7 @@ function RegisterNewUsers() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [userRole, setUserRole] = useState('');
-  const [disabled, setDisabled] = useState(true);
+  const [disabled, setDisabled] = useState(false);
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -33,8 +33,9 @@ function RegisterNewUsers() {
       const { token } = JSON.parse(localStorage.getItem('user'));
       const options = { headers: { Authorization: token } };
 
-      const response = await axios.post('http://localhost:3001/admin/manage', { name, email, password, role: userRole }, { options });
-      if (response) setUserRedirect(true);
+      const response = await axios.post('http://localhost:3001/admin/manage', { name, email, password, role: userRole }, options);
+
+      // if (response) setUserRedirect(true);
       return response;
     } catch (erro) {
       setError(erro.message);
@@ -86,9 +87,9 @@ function RegisterNewUsers() {
             name="tipo"
             onChange={ (event) => setUserRole(event.target.value) }
           >
-            <option>Cliente</option>
-            <option>Vendedor</option>
-            <option>Administrador</option>
+            <option>customer</option>
+            <option>seller</option>
+            <option>administrator</option>
           </select>
         </label>
 
@@ -102,7 +103,7 @@ function RegisterNewUsers() {
         </button>
       </form>
       { error && (
-        <h2>
+        <h2 data-testid="admin_manage__element-invalid-register">
           { error }
         </h2>
       ) }

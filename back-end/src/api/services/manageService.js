@@ -14,12 +14,12 @@ const getAllUsers = async () => {
   return allUsers;
 };
 
-const createNewUser = async (name, email, password) => {
-  const role = 'customer';
+const createNewUser = async (name, email, password, role) => {
+  // const role = 'customer';
   const hashPassword = md5(password);
 
   const userExists = await users.findOne({ where: { name, email, password: hashPassword } });
-  if (userExists) return { statusCode: 409, message: 'User already exists!' };
+  if (userExists) return { statusCode: 409, message: 'Conflict' };
 
   const newUser = await users.create({ name, email, password: hashPassword, role });
 
@@ -30,4 +30,9 @@ const createNewUser = async (name, email, password) => {
   return { name, email, password: hashPassword };
 };
 
-module.exports = { getAllUsers, createNewUser };
+const deleteOneUser = async (id) => {
+  await users.destroy({ where: { id } });
+  return { statusCode: 204, message: 'User successfully deleted!' };
+};
+
+module.exports = { getAllUsers, createNewUser, deleteOneUser };

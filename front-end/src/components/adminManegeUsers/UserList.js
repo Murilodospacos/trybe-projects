@@ -1,7 +1,31 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 
-function UserList({ users }) {
+const API_HOST = 'http://localhost:3001';
+const INVENTORY_API_URL = `${API_HOST}/admin/manage`;
+
+function UserList() {
+  const [users, setUsers] = useState([]);
+
+  const fetchInventory = () => {
+    fetch(`${INVENTORY_API_URL}`)
+      .then((res) => res.json())
+      .then((json) => setUsers(json));
+  };
+
+  useEffect(() => {
+    fetchInventory();
+  }, [users]);
+
+  async function handleDelete(id) {
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    const options = { headers: { Authorization: token } };
+
+    const response = await axios.delete(`http://localhost:3001/admin/manage/${id}`, options);
+    fetchInventory();
+    return response;
+  }
+
   return (
     <div>
       <h2>Lista de Usuários</h2>
@@ -23,16 +47,22 @@ function UserList({ users }) {
                   { index + 1 }
                 </td>
                 <td data-testid="admin_manage__element-user-table-name-">
-                  { user.name}
+                  { user.name }
                 </td>
                 <td data-testid="admin_manage__element-user-table-email-">
-                  { user.email}
+                  { user.email }
                 </td>
                 <td data-testid="admin_manage__element-user-table-role-">
                   { user.role }
                 </td>
-                <td data-testid="admin_manage__element-user-table-remove-">
-                  Excluir
+                <td>
+                  <button
+                    data-testid={ `admin_manage__element-user-table-remove-${index + 1}` }
+                    type="button"
+                    onClick={ () => handleDelete(user.id) }
+                  >
+                    Excluir
+                  </button>
                 </td>
               </tr>
             ))
@@ -42,9 +72,5 @@ function UserList({ users }) {
     </div>
   );
 }
-
-UserList.propTypes = {
-  users: PropTypes.arrayOf(PropTypes.name).isRequired,
-};
 
 export default UserList;

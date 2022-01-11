@@ -26,7 +26,6 @@ function CardProduct({ id, name, price, urlImage, key }) {
     setCart([...cart, { id, name, price, quantity: count }]);
   }, [count]);
 
-  console.log(cart);
   const handleIncrease = () => {
     if (count === magicNumber) {
       setCount(1);

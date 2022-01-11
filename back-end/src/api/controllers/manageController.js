@@ -11,8 +11,8 @@ const getAll = async (_req, res) => {
 
 const registerNewUser = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
-    const role = 'customer';
+    const { name, email, password, role } = req.body;
+
     const result = await manageService.createNewUser(name, email, password, role);
 
     if (!result) {
@@ -29,4 +29,15 @@ const registerNewUser = async (req, res) => {
   }
 };
 
-module.exports = { getAll, registerNewUser };
+const deleteUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await manageService.deleteOneUser(id);
+    
+    return res.status(200).json(result);
+  } catch (error) {
+    return res.status(500).json(error.message);  
+  }
+};
+
+module.exports = { getAll, registerNewUser, deleteUser };

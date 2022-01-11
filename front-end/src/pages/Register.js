@@ -30,7 +30,7 @@ function Register() {
   async function registerFunction() {
     try {
       const response = await axios.post('http://localhost:3001/register', { name, email, password });
-      console.log('Aqui');
+
       localStorage.setItem('user', JSON.stringify({
         name: response.data.userExists.name,
         email: response.data.userExists.email,
