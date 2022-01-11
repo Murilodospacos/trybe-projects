@@ -1,8 +1,23 @@
-const { users } = require('../../database/models/');
+const md5 = require('md5');
+const { users } = require('../../database/models');
 
 const getAllUsers = async () => {
   const allUsers = await users.findAll();
   return allUsers;
-}
+};
 
-module.exports = { getAllUsers };
+const createNewUser = async (name, email, password) => {
+  const role = 'customer';
+  const hashPassword = md5(password);
+
+  const userExists = await users.findOne({ where: { name, email, password: hashPassword } });
+  if (userExists) return { statusCode: 409, message: 'User already exists!' };
+
+  const newUser = await users.create({ name, email, password: hashPassword, role });
+
+  if (!newUser) return ({ message: 'Invalid fields' });
+
+  return { name, email, password: hashPassword, role };
+};
+
+module.exports = { getAllUsers, createNewUser };
