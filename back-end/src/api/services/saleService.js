@@ -12,7 +12,6 @@ const changeKeysCase = (obj) => {
 
 const getAll = async () => {
   const resultData = await sales.findAll();
-  // console.log(resultData);
   const result = resultData.map((i) => (i.dataValues)).map((i) => changeKeysCase(i));
   return result;
 };

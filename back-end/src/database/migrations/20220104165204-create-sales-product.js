@@ -24,7 +24,7 @@ module.exports = {
           key: 'id',
         },
       },
-      quatity: {
+      quantity: {
         allowNull: false,
         type: Sequelize.INTEGER
       },
