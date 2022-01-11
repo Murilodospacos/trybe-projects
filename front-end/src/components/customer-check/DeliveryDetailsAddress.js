@@ -1,4 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
+// async function loadProducts() {
+//   const result = await axios.post('http://localhost:3001/sales');
+//   console.log(result.data);
+//   setProducts(result.data);
+// }
 
 export default function DeliveryDetailsAddress() {
   return (
@@ -21,12 +28,15 @@ export default function DeliveryDetailsAddress() {
           Número
           <input type="text" data-testid="customer_checkout__input-addressNumber" />
         </label>
-        <button
-          type="button"
-          data-testid="customer_checkout__button-submit-order"
-        >
-          FINALIZAR PEDIDO
-        </button>
+        <Link to="/customer/order/">
+          <button
+            type="button"
+            data-testid="customer_checkout__button-submit-order"
+            // onClick={ () => loadProducts() }
+          >
+            FINALIZAR PEDIDO
+          </button>
+        </Link>
       </form>
     </section>
   );

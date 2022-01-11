@@ -10,7 +10,6 @@ export default function Products() {
   React.useEffect(() => {
     async function loadProducts() {
       const result = await axios.get('http://localhost:3001/products');
-      console.log(result.data);
       setProducts(result.data);
     }
     loadProducts();
@@ -20,7 +19,6 @@ export default function Products() {
     <div>
       <Navbar />
       <div style={ { display: 'flex', flexWrap: 'wrap' } }>
-        { console.log(products, 'Products') }
         { products.length > 0 ? products.map((value) => (
           <CardProduct
             key={ value.id }

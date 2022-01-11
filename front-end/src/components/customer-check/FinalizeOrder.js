@@ -19,7 +19,6 @@ export default function FinalizeOrder() {
 
   useEffect(() => {
     setCart(cart);
-    console.log(cart, 'carttt');
   }, [cart]);
 
   return (
