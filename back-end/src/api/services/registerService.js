@@ -2,7 +2,6 @@ const md5 = require('md5');
 const { users } = require('../../database/models');
 
 const createNewUser = async (name, email, password) => {
-  // console.log('CHEGUEI NA SERVICE');
   const role = 'customer';
   const hashPassword = md5(password);
 

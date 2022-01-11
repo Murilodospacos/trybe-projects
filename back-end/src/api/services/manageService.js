@@ -1,5 +1,13 @@
 const md5 = require('md5');
+// const jwt = require('jsonwebtoken');
 const { users } = require('../../database/models');
+
+// const secret = process.env.JWT_SECRET;
+
+// const jwtConfig = {
+//   expiresIn: '7d',
+//   algorithm: 'HS256',
+// };
 
 const getAllUsers = async () => {
   const allUsers = await users.findAll();
@@ -17,7 +25,9 @@ const createNewUser = async (name, email, password) => {
 
   if (!newUser) return ({ message: 'Invalid fields' });
 
-  return { name, email, password: hashPassword, role };
+  // const token = jwt.sign({ email }, secret, jwtConfig);
+
+  return { name, email, password: hashPassword };
 };
 
 module.exports = { getAllUsers, createNewUser };
