@@ -1,6 +1,4 @@
-/* eslint-disable camelcase */
 const _ = require('lodash');
-
 const { sales } = require('../../database/models');
 
 const changeKeysCase = (obj) => {

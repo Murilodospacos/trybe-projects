@@ -21,7 +21,6 @@ function Login() {
     localStorage.clear();
   }, []);
 
-
   useEffect(() => {
     function loginValidation() {
       const mailCheck = email.split('').includes('@') && email.split('.').includes('com');
