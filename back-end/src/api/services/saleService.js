@@ -18,7 +18,7 @@ const getAll = async () => {
 };
 
 const getBydId = async (id) => {
-  const resultData = await sales.findAll({ where: { user_id: id } });
+  const resultData = await sales.findAll({ where: { userId: id } });
   console.log(resultData);
   const result = resultData.map((i) => (i.dataValues)).map((i) => changeKeysCase(i));
   return result;
