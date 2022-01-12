@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function NavCustomer() {
   return (
@@ -12,12 +13,14 @@ function NavCustomer() {
         </button>
       </div>
       <div>
-        <button
-          type="button"
-          data-testid="customer_products__element-navbar-link-orders"
-        >
-          Meus Pedidos
-        </button>
+        <Link to="/customer/orders">
+          <button
+            type="button"
+            data-testid="customer_products__element-navbar-link-orders"
+          >
+            Meus Pedidos
+          </button>
+        </Link>
       </div>
     </div>
   );

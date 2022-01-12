@@ -19,7 +19,6 @@ app.use('/register', registerRouter);
 app.use('/admin/manage', manageRouter);
 app.use('/products', productRouter);
 app.use('/sales', saleRouter);
-
 app.get('/coffee', (_req, res) => res.status(418).end());
 
 module.exports = app;

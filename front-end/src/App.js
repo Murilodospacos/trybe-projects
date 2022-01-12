@@ -5,10 +5,9 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import AdminManageUsers from './pages/AdminManageUsers';
 import Products from './pages/Products';
+import ClientOrders from './pages/ClientOrders';
 import CustomerCheckout from './pages/CustomerCheckout';
 import DetailsCheckout from './pages/DetailsCheckout';
-import SellerSales from './pages/SellerSales';
-import SellerOrderDetails from './pages/SellerOrderDetails';
 
 function App() {
   return (
@@ -20,10 +19,9 @@ function App() {
           <Route exact path="/register" component={ Register } />
           <Route exact path="/admin/manage" component={ AdminManageUsers } />
           <Route exact path="/customer/products" component={ Products } />
+          <Route exact path="/customer/orders" component={ ClientOrders } />
           <Route exact path="/customer/checkout" component={ CustomerCheckout } />
           <Route exact path="/customer/order/:id" component={ DetailsCheckout } />
-          <Route path="/seller/orders" component={ SellerSales } />
-          <Route exact path="/seller/orders/:id" component={ SellerOrderDetails } />
         </Switch>
       </BrowserRouter>
     </div>
