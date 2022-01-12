@@ -16,6 +16,7 @@ function Login() {
     if (localStorage.getItem('user')) {
       setToken(true);
     }
+    localStorage.clear();
   }, []);
 
   useEffect(() => {
