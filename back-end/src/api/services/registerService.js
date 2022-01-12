@@ -6,7 +6,7 @@ const createNewUser = async ({ name, email, password, role }) => {
   const hashPassword = md5(password);
   try {
     const userExists = await users.findOne({ where: { name, email } });
-    console.log(userExists);
+
     if (userExists) return { statusCode: 409, message: 'User already exists!' };
   
     const newUser = await users.create({ name, email, password: hashPassword, role });

@@ -18,7 +18,9 @@ function Login() {
     if (localStorage.getItem('user')) {
       setToken(true);
     }
-  }, [isToken]);
+    localStorage.clear();
+  }, []);
+
 
   useEffect(() => {
     function loginValidation() {
