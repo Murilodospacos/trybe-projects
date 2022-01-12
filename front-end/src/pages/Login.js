@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import '../App.css';
 import rockGlass from '../images/rockGlass.svg';
@@ -11,6 +11,8 @@ function Login() {
   const [isToken, setToken] = useState(false);
   const [error, setError] = useState(false);
   const [isRole, setRole] = useState(null);
+  const history = useHistory();
+  const testId = 'common_login__element-invalid-email';
 
   useEffect(() => {
     if (localStorage.getItem('user')) {
@@ -18,6 +20,7 @@ function Login() {
     }
     localStorage.clear();
   }, []);
+
 
   useEffect(() => {
     function loginValidation() {
@@ -45,7 +48,6 @@ function Login() {
       }));
       setRole(response.data.userExists.role);
       setToken(true);
-      return response;
     } catch (erro) {
       setError(erro.message);
     }
@@ -110,8 +112,8 @@ function Login() {
           </button>
         </Link>
       </div>
-      { error && <div data-testid="common_login__element-invalid-email">{ error }</div> }
-      { isToken && <Redirect to={ handlePath[isRole] } /> }
+      { error ? <div data-testid={ testId }>{ error }</div> : '' }
+      { isToken ? history.push(handlePath[isRole]) : <p>Trybe 2021</p> }
     </div>
   );
 }
