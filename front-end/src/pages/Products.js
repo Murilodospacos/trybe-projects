@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import CardProduct from '../components/CardProduct';
 import Navbar from '../components/Navbar';
 
@@ -9,7 +10,6 @@ export default function Products() {
   React.useEffect(() => {
     async function loadProducts() {
       const result = await axios.get('http://localhost:3001/products');
-
       setProducts(result.data);
     }
     loadProducts();
@@ -29,6 +29,9 @@ export default function Products() {
           />
         )) : 'Loading' }
       </div>
+      <Link to="/customer/checkout">
+        <button type="button">Ver Carrinho: R$</button>
+      </Link>
     </div>
   );
 }
