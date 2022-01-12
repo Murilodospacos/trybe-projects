@@ -7,8 +7,9 @@ function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [disabled, setDisabled] = useState(true);
-  const [userRedirect, setUserRedirect] = useState(false);
   const [error, setError] = useState(false);
+  const [isToken, setToken] = useState(false);
+  const [isRole, setRole] = useState(null);
 
   useEffect(() => {
     function loginValidation() {
@@ -29,17 +30,28 @@ function Register() {
   async function registerFunction() {
     try {
       const response = await axios.post('http://localhost:3001/register', { name, email, password });
-      if (response) setUserRedirect(true);
+
+      localStorage.setItem('user', JSON.stringify({
+        name: response.data.userExists.name,
+        email: response.data.userExists.email,
+        role: response.data.userExists.role,
+        token: response.data.token,
+      }));
+      setRole(response.data.userExists.role);
+      setToken(true);
+      console.log('response', response);
       return response;
     } catch (erro) {
+      console.log(erro.message);
       setError(erro.message);
     }
   }
 
-  async function handleSubmit(event) {
-    event.preventDefault();
-    await registerFunction();
-  }
+  const handlePath = {
+    customer: '/customer/products',
+    seller: '/seller/orders',
+    administrator: '/admin/manage',
+  };
 
   return (
     <div>
@@ -76,10 +88,10 @@ function Register() {
           />
         </label>
         <button
-          type="submit"
+          type="button"
           data-testid="common_register__button-register"
           disabled={ disabled }
-          onClick={ handleSubmit }
+          onClick={ registerFunction }
         >
           CADASTRAR
         </button>
@@ -89,7 +101,7 @@ function Register() {
           { error }
         </div>
       ) }
-      { userRedirect && <Redirect to="/customer/products" /> }
+      { isToken && <Redirect to={ handlePath[isRole] } /> }
     </div>
   );
 }
