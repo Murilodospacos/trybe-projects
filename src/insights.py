@@ -46,7 +46,7 @@ def get_unique_industries(path):
     data = read(path)
     single_industry = set()
     for industry in data:
-        if (industry["industry"] != ""):
+        if industry["industry"] != "":
             single_industry.add(industry["industry"])
     return single_industry
     """Checks all different industries and returns a list of them
@@ -87,6 +87,16 @@ def filter_by_industry(jobs, industry):
 
 
 def get_max_salary(path):
+    data = read(path)
+    max_sal = []
+    for salary in data:
+        # Verifique se todos os caracteres no texto são numéricos:
+        # Tive dica do Antônio Schappo com isnumeric
+        if salary["max_salary"].isnumeric():
+            number = int(salary["max_salary"])
+            max_sal.append(number)
+    return max(max_sal)
+
     """Get the maximum salary of all jobs
 
     Must call `read`
@@ -105,6 +115,14 @@ def get_max_salary(path):
 
 
 def get_min_salary(path):
+    data = read(path)
+    min_sal = []
+    for salary in data:
+        # Verifique se todos os caracteres no texto são numéricos:
+        if salary["min_salary"].isnumeric():
+            number = int(salary["min_salary"])
+            min_sal.append(number)
+    return min(min_sal)
     """Get the minimum salary of all jobs
 
     Must call `read`
