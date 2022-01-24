@@ -141,6 +141,24 @@ def get_min_salary(path):
 
 
 def matches_salary_range(job, salary):
+    # https://www.w3schools.com/python/ref_keyword_raise.asp
+    # alguma das chaves min_salary ou max_salary estão ausentes no dicionário;
+    if "min_salary" not in job or "max_salary" not in job:
+        raise ValueError
+    # alguma das chaves min_salary ou max_salary tem valores não-numéricos;
+    if type(job["min_salary"]) != int or type(job["max_salary"]) != int:
+        raise ValueError
+    # o valor de min_salary é maior que o valor de max_salary;
+    if job["min_salary"] > job["max_salary"]:
+        raise ValueError
+    # o parâmetro salary tem valores não-numéricos;
+    if type(salary) != int:
+        raise ValueError
+
+    is_salary_range = job["min_salary"] <= salary <= job["max_salary"]
+    return is_salary_range
+    # https://stackoverflow.com/questions/13628791/determine-whether-integer-is-between-two-other-integers
+
     """Checks if a given salary is in the salary range of a given job
 
     Parameters
