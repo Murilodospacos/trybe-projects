@@ -185,6 +185,16 @@ def matches_salary_range(job, salary):
 
 
 def filter_by_salary_range(jobs, salary):
+    filter_salary = list()
+
+    for job in jobs:
+        try:
+            if matches_salary_range(job, salary):
+                filter_salary.append(job)
+        except ValueError:
+            continue
+    return filter_salary
+
     """Filters a list of jobs by salary range
 
     Parameters
