@@ -1,25 +1,27 @@
 import requests
+from parsel import Selector
 import time
 
 
 # Requisito 1
 def fetch(url):
     try:
-        for _ in range(20):
+        for _ in range(5):
             response = requests.get(url)
             time.sleep(3)
         response.raise_for_status()
-    except requests.HTTPError:
-        ...
-    except requests.Timeout:
-        ...
+    except (requests.HTTPError, requests.Timeout):
+        return None
     else:
         return response.text
 
 
 # Requisito 2
 def scrape_novidades(html_content):
-    """Seu código deve vir aqui"""
+    selector = Selector(html_content)
+    list_urls = selector.css(
+        "div.tec--list__item a.tec--card__title__link::attr(href)").getall()
+    return list_urls
 
 
 # Requisito 3
