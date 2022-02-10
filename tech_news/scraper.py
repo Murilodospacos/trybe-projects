@@ -16,17 +16,24 @@ def fetch(url):
         return response.text
 
 
-# Requisito 2
+# Requisito 2 - Tive ajuda do Mauricio / Explicação Xpath
 def scrape_novidades(html_content):
     selector = Selector(html_content)
-    list_urls = selector.css(
-        "div.tec--list__item a.tec--card__title__link::attr(href)").getall()
+    path1 = "/html/body/div[1]/main/div/div/"
+    path2 = "div[1]/div[2]//div/article/div/h3/a/@href"
+    list_urls = selector.xpath(path1+path2).getall()
     return list_urls
 
 
 # Requisito 3
 def scrape_next_page_link(html_content):
-    """Seu código deve vir aqui"""
+    selector = Selector(html_content)
+    next_link = selector.css(
+            "div.tec--list a.tec--btn::attr(href)"
+        ).get()
+    if not next_link:
+        return None
+    return next_link
 
 
 # Requisito 4
