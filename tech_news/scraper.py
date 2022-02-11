@@ -1,3 +1,4 @@
+from tech_news.database import create_news
 from bs4 import BeautifulSoup
 import requests
 from parsel import Selector
@@ -98,4 +99,19 @@ def scrape_noticia(html_content):
 
 # Requisito 5
 def get_tech_news(amount):
-    """Seu código deve vir aqui"""
+    URL_BASE = "https://www.tecmundo.com.br/novidades"
+    all_page_links = []
+    data_news_page = []
+    # pegar todos links conforme quantidade(amount)
+    while len(all_page_links) < amount:
+        content = fetch(URL_BASE)
+        all_page_links.extend(scrape_novidades(content))
+        URL_BASE = scrape_next_page_link(content)
+    # percorrer todos links e popular meu data
+    for scrape_news in all_page_links:
+        if len(data_news_page) < amount:
+            data_news_page.append(scrape_noticia(fetch(scrape_news)))
+        else:
+            break
+    create_news(data_news_page)
+    return data_news_page
