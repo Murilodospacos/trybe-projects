@@ -95,11 +95,6 @@ def scrape_noticia(html_content):
             "categories": categories,
         }
 
-# https://www.tecmundo.com.br/dispositivos-moveis/215327-pixel-5a-tera-lancamento-limitado-devido-escassez-chips.htm
-# url1 = "https://www.tecmundo.com.br/mobilidade-urbana-smart-cities/"
-# url2 = "155000-musk-tesla-carros-totalmente-autonomos.htm"
-# print(scrape_noticia(fetch(url1 + url2)))
-
 
 # Requisito 5
 def get_tech_news(amount):
