@@ -1,4 +1,5 @@
 from tech_news.database import search_news
+from datetime import datetime
 
 
 # Requisito 6
@@ -17,15 +18,46 @@ def search_by_title(title):
 
 
 # Requisito 7
+# Tive ajuda do Rogrigo Coin Instrutor
+# Formatação das datas e uso do regex
 def search_by_date(date):
-    """Seu código deve vir aqui"""
+    try:
+        new_date = datetime.strptime(date, "%Y-%m-%d").date()
+        data = search_news({"timestamp": {"$regex": str(new_date)}})
+        response = list()
+        for new in data:
+            response.append((
+                new["title"], new["url"]
+            ))
+    except ValueError:
+        raise ValueError("Data inválida")
+    else:
+        return response
 
 
 # Requisito 8
+# Tive ajuda do Rogrigo Coin Instrutor
+# Formatação das datas e uso do regex
 def search_by_source(source):
-    """Seu código deve vir aqui"""
+    data = search_news(
+        {"sources": {"$regex": source, "$options": "i"}})
+    res = []
+    for new in data:
+        res.append((
+            new["title"], new["url"]
+        ))
+    return res
 
 
 # Requisito 9
+# Tive ajuda do Rogrigo Coin Instrutor
+# Formatação das datas e uso do regex
 def search_by_category(category):
-    """Seu código deve vir aqui"""
+    data_new = search_news(
+        {"categories": {"$regex": category, "$options": "i"}})
+    resp = []
+    for new in data_new:
+        resp.append((
+            new["title"], new["url"]
+        ))
+    return resp
