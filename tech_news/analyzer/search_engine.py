@@ -1,6 +1,19 @@
+from tech_news.database import search_news
+
+
 # Requisito 6
+# https://stackoverflow.com/questions/8246019/case-insensitive-search-in-mongo
 def search_by_title(title):
-    """Seu código deve vir aqui"""
+    data = search_news({"title": {"$regex": title, "$options": "i"}})
+    response = []
+    if not data:
+        return []
+    else:
+        for new in data:
+            response.append((
+                new["title"], new["url"]
+            ))
+    return response
 
 
 # Requisito 7
