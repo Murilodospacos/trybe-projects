@@ -1,4 +1,0 @@
-
-> sd-0x-project-trybewarts-rubric@1.0.0 lint
-> eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json . --ext .js, .jsx
-
