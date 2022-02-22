@@ -1,2 +1,6 @@
+import string
+
+
 def find_duplicate(nums):
-    """ Faça o código aqui. """
+    if not nums or type(nums) == string or len(nums) == 1:
+        return False
