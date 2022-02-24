@@ -52,3 +52,10 @@
 - React Testing Library
 ##### [Trybe Wallet](https://github.com/Murilodospacos/trybe-projects/tree/murilopacos-project-trybewallet)
 - Gegerenciamento de estados com Redux
+##### [Trivia](https://github.com/Murilodospacos/trybe-projects/tree/main-group-31)
+- React
+- Redux
+- Kanban
+##### [Starwars Planets Search](https://github.com/Murilodospacos/trybe-projects/tree/murilopacos-project-starwars-planets-search)
+- Context Api
+- Hooks
