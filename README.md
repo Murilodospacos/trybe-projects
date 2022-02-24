@@ -44,3 +44,11 @@
 - React
 - Ciclo de vida dos componentes
 - Router
+##### [Front-End Online Store](https://github.com/Murilodospacos/trybe-projects/tree/main-group-37)
+- Métodos Ágeis
+- Trabalhar em equipe utilizando Kanban ou Scrum de maneira eficaz
+##### [React Testing Library](https://github.com/Murilodospacos/trybe-projects/tree/murilopacos-react-testing)
+- Testes Automatizados
+- React Testing Library
+##### [Trybe Wallet](https://github.com/Murilodospacos/trybe-projects/tree/murilopacos-project-trybewallet)
+- Gegerenciamento de estados com Redux
