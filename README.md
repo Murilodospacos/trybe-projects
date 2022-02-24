@@ -59,3 +59,8 @@
 ##### [Starwars Planets Search](https://github.com/Murilodospacos/trybe-projects/tree/murilopacos-project-starwars-planets-search)
 - Context Api
 - Hooks
+##### [App de Receitas](https://github.com/Murilodospacos/trybe-projects/tree/main-group-40)
+- React
+- Context
+- Trabalho em Grupo
+- Métodos Ágeis - Kanban
