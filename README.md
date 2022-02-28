@@ -83,3 +83,39 @@
 ##### [Aggregations](https://github.com/Murilodospacos/trybe-projects/tree/murilopacos-mongodb-aggregations)
 - Mongodb
 - Aggregation Framework
+##### [Talker Manager](https://github.com/Murilodospacos/trybe-projects/tree/murilopacos-sd-011-project-talker-manager)
+- Introdução desenvolvimento Web com Node.js
+##### [Store Manager](https://github.com/Murilodospacos/trybe-projects/tree/murilopacos-sd-011-store-manager)
+- Node.js
+- Camada de Serviço
+- Arquitetura Rest e Restfull
+##### [Cookmaster](https://github.com/Murilodospacos/trybe-projects/tree/murilopacos-sd-011-cookmaster)
+- Autenticação JWT
+- Upload Arquivos com Multer
+##### [Stranger Things - Front end](https://github.com/Murilodospacos/trybe-projects/tree/murilopacos-sd-011-stranger-things-frontend)
+- Deploy com Heroku
+##### [Stranger Things - Back end](https://github.com/Murilodospacos/trybe-projects/tree/murilopacos-sd-011-stranger-things-backend)
+- Deploy com Heroku
+##### [API de Blogs](https://github.com/Murilodospacos/trybe-projects/tree/murilopacos-sd-011-project-blogs-api)
+- Arquitetura Solid e ORM
+- Sequelize
+##### [WebChat](https://github.com/Murilodospacos/trybe-projects/tree/murilopacos-webchat-project)
+- Sockets
+- Arquitetura MSC ou MVC
+- Socket.io
+##### [App de Delivery](https://github.com/Murilodospacos/trybe-projects/tree/main-group-12)
+- Projeto em Grupo
+- Aplicar todos conhecimentos do bloco de back-end
+### Ciência da Computação
+##### [Job Insights](https://github.com/Murilodospacos/trybe-projects/tree/murilo-pacos-job-insights)
+- Introdução á Python
+##### [Relatório de Estoque](https://github.com/Murilodospacos/trybe-projects/tree/main-group-9)
+- POO na prática
+- Padrões de Projeto
+##### [Tech News](https://github.com/Murilodospacos/trybe-projects/tree/murilo-pacos-tech-news)
+- Redes
+- Rapagem de Dados com Parsel
+##### [Algorithms](https://github.com/Murilodospacos/trybe-projects/tree/murilopacos-project-algorithms)
+- Algoritmos
+- Recursividade
+- Ordenação
