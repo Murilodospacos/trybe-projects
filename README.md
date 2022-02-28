@@ -64,3 +64,22 @@
 - Context
 - Trabalho em Grupo
 - Métodos Ágeis - Kanban
+### Desenvolvimento Back-end
+##### [All For One](https://github.com/Murilodospacos/trybe-projects/tree/murilopacos-mysql-all-for-one)
+- Introdução SQL
+##### [Vocabulary Booster](https://github.com/Murilodospacos/trybe-projects/tree/murilopacos-mysql-vocabulary-booster)
+- Funções SQL
+- JOINS
+- Normalização
+##### [One For All](https://github.com/Murilodospacos/trybe-projects/tree/murilopacos-mysql-one-for-all)
+- SQL
+- Normalização
+- Modelagem Banco de dados
+##### [DataFlights](https://github.com/Murilodospacos/trybe-projects/tree/murilopacos-mongodb-dataflights)
+- Introdução Mongodb
+##### [MongoDB Commerce](https://github.com/Murilodospacos/trybe-projects/tree/murilopacos-mongodb-commerce)
+- Mongodb
+- UPDATES simples e complexos
+##### [Aggregations](https://github.com/Murilodospacos/trybe-projects/tree/murilopacos-mongodb-aggregations)
+- Mongodb
+- Aggregation Framework
