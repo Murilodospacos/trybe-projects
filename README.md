@@ -1,9 +1,10 @@
 # Boas vindas ao repositório backend do projeto de Deploy - Stranger Things!
 
-Aqui você vai encontrar os locais para colocar suas repostas relativas aos requisitos de backend.
+## Habilidades
 
-**Lembre-se**: coloque as respostas apenas dos requisitos que contém o seguinte direcionamento:
-
-  - Adicione os comandos utilizados, de maneira sequencial, ao README do backend.
-
-**Nota**: Este direcionamento está presente no [repositório](https://github.com/tryber/sd-011-stranger-things) em que os requisitos do projeto são destrinchados.
+- Publicar aplicações através do Heroku;
+- Visualizar logs das suas aplicações publicadas;
+- Monitorar suas aplicações publicadas;
+- Utilizar variáveis de ambiente dentro do Heroku;
+- Instalar, utilizar e aproveitar os principais recursos do PM2;
+- Fazer deploy no Heroku aproveitando recursos de um process manager.
