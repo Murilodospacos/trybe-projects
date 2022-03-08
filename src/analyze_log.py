@@ -1,5 +1,5 @@
-import csv
 from collections import Counter
+import csv
 
 
 def data_read_csv(path):
@@ -34,11 +34,7 @@ def order_type_quantity(path, nome, pedido):
 def customer_dishes_never_asked(path, nome):
     data = data_read_csv(path)
     all_dishes = set([dishe[1] for dishe in data])
-    dishes = list(frozenset([
-            item[1]
-            for item in data
-            if item[0] == nome
-        ]))[0]
+    dishes = list(frozenset([item[1] for item in data if item[0] == nome]))[0]
     res = set([item for item in all_dishes if item != dishes])
     return res
 
@@ -47,19 +43,11 @@ def customer_dishes_never_asked(path, nome):
 def customer_never_went(path, nome):
     data = data_read_csv(path)
     all_dishes = set([dishe[2] for dishe in data])
-    dishes = list(frozenset([
-            item[2]
-            for item in data
-            if item[0] == nome
-        ]))[0]
+    dishes = list(frozenset([item[2] for item in data if item[0] == nome]))[0]
     res = set([item for item in all_dishes if item != dishes])
     return res
 
 
-# customer_never_went("data/orders_1.csv", "joao")
-
-
-# fileTXT = "data/mkt_campaign.txt"
 def analyze_log(path_to_file):
     data_read_csv(path_to_file)
     response1 = customer_most_requested_dish(path_to_file, "maria")
@@ -70,6 +58,3 @@ def analyze_log(path_to_file):
     with open("data/mkt_campaign.txt", "w") as file:
         file.write(f"{response1}\n{response2}\n{response3}\n{response4}\n")
     file.close()
-
-
-# analyze_log("data/orders_1.csv")
