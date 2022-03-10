@@ -1,15 +1,32 @@
+from collections import deque
+
+
 class Queue:
     def __init__(self):
-        self._data = []
+        self._data = deque()
 
     def __len__(self):
-        """Aqui irá sua implementação"""
+        return len(self._data)
+
+    def is_empty(self):
+        return self._data == []
 
     def enqueue(self, value):
-        """Aqui irá sua implementação"""
+        self._data.append(value)
 
     def dequeue(self):
-        """Aqui irá sua implementação"""
+        if not self.is_empty():
+            return self._data.popleft()
+        else:
+            return None
+
+    def peek(self):
+        if self.is_empty():
+            return None
+        return self._data[0]
 
     def search(self, index):
-        """Aqui irá sua implementação"""
+        if index >= 0 and index <= len(self._data) - 1:
+            return self._data[index]
+        else:
+            raise IndexError("Índice Inválido")
