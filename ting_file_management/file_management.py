@@ -12,9 +12,3 @@ def txt_importer(path_file):
         return sys.stderr.write(f"Arquivo {path_file} não encontrado\n")
     else:
         return data
-
-
-# txtFile.write("Formato inválido")
-
-
-print(txt_importer("statics/arquivo_teste.txt"))
