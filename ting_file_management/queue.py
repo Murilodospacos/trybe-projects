@@ -12,6 +12,8 @@ class Queue:
         return self._data == []
 
     def enqueue(self, value):
+        if value in self._data:
+            return None
         self._data.append(value)
 
     def dequeue(self):
