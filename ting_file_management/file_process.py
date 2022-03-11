@@ -1,4 +1,3 @@
-# from ting_file_management.queue import Queue
 from ting_file_management.file_management import txt_importer
 import sys
 
@@ -24,10 +23,14 @@ def remove(instance):
 
 
 def file_metadata(instance, position):
-    """Aqui irá sua implementação"""
-
-
-# if __name__ == "__main__":
-#     project = Queue()
-#     print(remove(project))
-    # print(process("statics/arquivo_teste.txt", project))
+    try:
+        get_file = instance.search(position)
+        read_file = txt_importer(get_file)
+        data = {
+            "nome_do_arquivo": get_file,
+            "qtd_linhas": len(read_file),
+            "linhas_do_arquivo": read_file,
+        }
+        return sys.stdout.write(str(data))
+    except IndexError:
+        return sys.stderr.write("Posição inválida")

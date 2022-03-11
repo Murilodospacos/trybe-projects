@@ -28,4 +28,4 @@ class Queue:
         if index >= 0 and index <= len(self._data) - 1:
             return self._data[index]
         else:
-            raise IndexError("Índice Inválido")
+            raise IndexError
