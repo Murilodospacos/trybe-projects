@@ -8,22 +8,19 @@ class Queue:
     def __len__(self):
         return len(self._data)
 
-    def is_empty(self):
-        return self._data == []
-
     def enqueue(self, value):
         if value in self._data:
             return None
         self._data.append(value)
 
     def dequeue(self):
-        if not self.is_empty():
-            return self._data.popleft()
-        else:
+        if len(self._data) == 0:
             return None
+        else:
+            return self._data.popleft()
 
     def peek(self):
-        if self.is_empty():
+        if len(self._data) == 0:
             return None
         return self._data[0]
 
