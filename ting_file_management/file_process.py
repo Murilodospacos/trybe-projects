@@ -3,6 +3,7 @@ from ting_file_management.file_management import txt_importer
 import sys
 
 
+# Tive ajuda do Mauricio
 def process(path_file, instance):
     instance.enqueue(path_file)
     file = txt_importer(path_file)
