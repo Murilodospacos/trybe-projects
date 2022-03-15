@@ -1,4 +1,5 @@
 import sys
+from collections import Counter
 
 
 def txt_importer(path_file):
@@ -14,3 +15,13 @@ def txt_importer(path_file):
         return sys.stderr.write(f"Arquivo {path_file} não encontrado\n")
     else:
         return data
+
+
+if __name__ == "__main__":
+    res = txt_importer("statics/arquivo_teste.txt")
+    print(res)
+    line1 = res[0].split(" ")
+    print(line1)
+    lower_words = [word.lower() for word in line1]
+    print(lower_words)
+    print(Counter(lower_words)["acima"])
