@@ -119,3 +119,13 @@
 - Algoritmos
 - Recursividade
 - Ordenação
+##### [Restaurant-Orders](https://github.com/Murilodospacos/trybe-projects/tree/murilopacos-project-restaurant-orders)
+- Estrutura de Dados
+- Arrays
+- Hashmaps
+- Set
+##### [TING](https://github.com/Murilodospacos/trybe-projects/tree/murilopacos-project-ting)
+- Estrutura de Dados
+- Listas
+- Filas
+- Pilhas
