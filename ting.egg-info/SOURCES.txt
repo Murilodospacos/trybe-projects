@@ -1,0 +1,8 @@
+README.md
+pyproject.toml
+setup.cfg
+setup.py
+ting.egg-info/PKG-INFO
+ting.egg-info/SOURCES.txt
+ting.egg-info/dependency_links.txt
+ting.egg-info/top_level.txt
